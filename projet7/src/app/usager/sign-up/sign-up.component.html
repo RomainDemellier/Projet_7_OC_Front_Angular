@@ -1,0 +1,39 @@
+<!-- <form #registrationForm="ngForm" class="col s12 white" (ngSubmit)="onSubmit(registrationForm)"> -->
+  <form #registrationForm="ngForm" class="col s12 white" (ngSubmit)="onSubmit(confirmPassword.value)">
+  <div class="row">
+    <div class="input-field col s6">
+      <!-- <i class="material-icons prefix">account_circle</i> -->
+      <!-- <input type="text" #firstName ngModel name="firstName" placeholder="Firstname"> -->
+      <input type="text" #prenom="ngModel" required pattern="^[a-zA-Z]{1,15}$" [(ngModel)]="usager.prenom" name="firstName" placeholder="Firstname">
+    </div>
+    <div class="input-field col s6">
+      <!-- <input type="text" #lastName ngModel name="lastName" placeholder="Lastname"> -->
+      <input type="text" #nom="ngModel" required pattern="^[a-zA-Z]{1,15}$" [(ngModel)]="usager.nom" name="lastName" placeholder="Lastname">
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <!-- <input type="text" #email ngModel name="email" placeholder="Email"> -->
+      <input type="text" #email="ngModel" required pattern="^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$" [(ngModel)]="usager.email" name="email" placeholder="Email">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <!-- <input type="text" #password ngModel name="password" placeholder="Password"> -->
+      <input type="text" required #password="ngModel" pattern="[\w,\W]{8,12}" [(ngModel)]="usager.password" name="password" placeholder="Password">
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input type="text" required #confirmPassword ngModel name="confirmPassword" placeholder="Confirm password">
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <button class="btn-large btn-submit" type="submit" [disabled]="!registrationForm.valid || password.value!=confirmPassword.value">Envoyer
+        <i class="material-icons right">send</i>
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,21 @@
+<form #loginForm="ngForm" class="col s12 white" (ngSubmit)="onSubmit(userName.value,password.value)">
+  <div class="row">
+    <div class="input-field col s12">
+      <i class="material-icons prefix">account_circle</i>
+      <input type="text" #userName ngModel name="userName" placeholder="Username">
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <i class="material-icons prefix">vpn_key</i>
+      <input type="text" #password ngModel name="password" placeholder="Password">
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <button class="btn-large btn-submit col s12" type="submit">Login
+        <!-- <i class="material-icons right">send</i> -->
+      </button>
+    </div>
+  </div>
+</form>
