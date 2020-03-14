@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthorizationService {
 
-  private token: String;
+  private token: String = '';
 
   constructor() { }
 
@@ -16,5 +16,9 @@ export class AuthorizationService {
 
   getToken(): String {
     return this.token;
+  }
+
+  resetToken(): void {
+    this.token = '';
   }
 }
