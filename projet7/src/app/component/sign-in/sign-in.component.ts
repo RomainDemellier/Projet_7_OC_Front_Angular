@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { LoginService } from 'src/app/login.service';
+import { NgForm, FormBuilder, Validators } from '@angular/forms';
+import { LoginService } from 'src/app/service/login.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Login } from 'src/app/login';
-import { AuthorizationService } from 'src/app/authorization.service';
+import { Login } from 'src/app/interface/login';
+import { AuthorizationService } from 'src/app/service/authorization.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,22 +17,22 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
+    private fb: FormBuilder,
     private authorizationService: AuthorizationService,
     private router: Router
   ) { }
 
+  loginForm = this.fb.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required]
+  })
+
   ngOnInit() {
   }
 
-  onSubmit(username, password){
-    // var dataLoginJson = {
-    //   'username': username,
-    //   'password': password
-    // }
-    console.log(username);
-    this.login = { username: username, password: password }
+  onSubmit(){
 
-    this.loginService.authenticate(this.login).subscribe((data:any) => {
+    this.loginService.authenticate(this.loginForm.value).subscribe((data:any) => {
       console.log("Succès ");
       this.authorizationService.initializeToken(data);
       this.router.navigate(['/home']);

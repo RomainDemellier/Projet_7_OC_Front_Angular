@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Usager } from './usager';
+import { Usager } from '../interface/usager';
+import { UsagerRegistration } from '../interface/usager-registration';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UsagerService {
     private http: HttpClient
   ) { }
 
-  createUsager(usager: Usager): Observable<any> {
+  createUsager(usager: UsagerRegistration): Observable<any> {
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -22,10 +23,10 @@ export class UsagerService {
         //'Authorization': 'Bearer'
       })
     };
-    return this.http.post<Usager>(this.apiUrl + '/create',usager,httpOptions);
+    return this.http.post<UsagerRegistration>(this.apiUrl + '/create',usager,httpOptions);
   }
 
-  getUsagerConnecte(token: String): Observable<Usager> {
+  getUsagerConnecte(token: string): Observable<Usager> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',

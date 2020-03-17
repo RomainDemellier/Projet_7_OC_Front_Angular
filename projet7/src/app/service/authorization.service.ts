@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthorizationService {
 
-  private token: String = '';
+  private token: string = '';
 
   constructor() { }
 
@@ -14,7 +14,7 @@ export class AuthorizationService {
     console.log("Dans intializeToken token : " + this.token);
   }
 
-  getToken(): String {
+  getToken(): string {
     return this.token;
   }
 

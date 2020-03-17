@@ -9,29 +9,20 @@
               <th>Titre</th>
               <th>Auteur</th>
               <th>Genre</th>
+              <th>Disponibilité</th>
           </tr>
         </thead>
   
         <tbody>
-          <!-- <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr> -->
           <tr *ngFor="let livre of livres">
             <td><strong>{{livre.titre}}</strong></td>
             <td>{{livre.auteur.prenom + " " + livre.auteur.nom}}</td>
             <td>{{livre.genre}}</td>
+            <td *ngIf="livre.nbreExemplaires > 0">
+              <a class="waves-effect waves-light btn-small" (click)="emprunter(livre)">
+                <i class="material-icons right">book</i>Emprunter</a>
+            </td>
+            <td *ngIf="livre.nbreExemplaires <= 0">Non disponible</td>
           </tr>
         </tbody>
       </table>
