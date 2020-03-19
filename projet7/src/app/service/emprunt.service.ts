@@ -36,4 +36,34 @@ export class EmpruntService {
 
       return this.http.get<Emprunt[]>(this.apiUrl + '/usager/emprunts', httpOptions);
     }
+
+    getEmpruntById(id: number, token: string): Observable<Emprunt> {
+      // const httpOptions = {
+      //   headers: new HttpHeaders({
+      //     'Content-Type':  'application/json',
+      //     'Authorization': 'Bearer ' + token
+      //   })
+      // };
+      return this.http.get<Emprunt>(this.apiUrl + '/emprunt/' + id);
+    }
+
+    prolonger(id: number, token: string): Observable<Emprunt>{
+      // const httpOptions = {
+      //   headers: new HttpHeaders({
+      //     'Content-Type':  'application/json',
+      //     'Authorization': 'Bearer ' + token
+      //   })
+      // };
+      return this.http.put<any>(this.apiUrl + '/emprunt/prolonger/' + id, null);
+    }
+
+    rendre(id: number, token: string): Observable<Emprunt>{
+      // const httpOptions = {
+      //   headers: new HttpHeaders({
+      //     'Content-Type':  'application/json',
+      //     'Authorization': 'Bearer ' + token
+      //   })
+      // };
+      return this.http.delete<Emprunt>(this.apiUrl + '/emprunt/delete/' + id);
+    }
 }

@@ -17,22 +17,22 @@ export class UsagerService {
 
   createUsager(usager: UsagerRegistration): Observable<any> {
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        //'Authorization': 'Bearer'
-      })
-    };
-    return this.http.post<UsagerRegistration>(this.apiUrl + '/create',usager,httpOptions);
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     //'Authorization': 'Bearer'
+    //   })
+    // };
+    return this.http.post<UsagerRegistration>(this.apiUrl + '/create',usager);
   }
 
   getUsagerConnecte(token: string): Observable<Usager> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'Bearer ' + token
-      })
-    };
-    return this.http.get<Usager>(this.apiUrl + '/connecte',httpOptions);
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     'Authorization': 'Bearer ' + token
+    //   })
+    // };
+    return this.http.get<Usager>(this.apiUrl + '/connecte');
   }
 }

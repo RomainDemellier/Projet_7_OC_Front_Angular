@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -15,6 +15,8 @@ import { appRoutes } from './route';
 import { ListeLivresComponent } from './component/liste-livres/liste-livres.component';
 import { EmpruntComponent } from './component/emprunt/emprunt.component';
 import { from } from 'rxjs';
+import { EmpruntDetailsComponent } from './emprunt-details/emprunt-details.component';
+import { TokenInterceptorService } from './service/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { from } from 'rxjs';
     SignInComponent,
     SignUpComponent,
     ListeLivresComponent,
-    EmpruntComponent
+    EmpruntComponent,
+    EmpruntDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,11 @@ import { from } from 'rxjs';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

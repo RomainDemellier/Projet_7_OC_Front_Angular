@@ -13,12 +13,12 @@ export class LivreService {
   constructor(private http: HttpClient) { }
 
   getLivresDisponibles(bearer): Observable<Livre[]>{
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'Bearer ' + bearer
-      })
-    };
-    return this.http.get<Livre[]>(this.apiUrl, httpOptions);
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     'Authorization': 'Bearer ' + bearer
+    //   })
+    // };
+    return this.http.get<Livre[]>(this.apiUrl);
   }
 }

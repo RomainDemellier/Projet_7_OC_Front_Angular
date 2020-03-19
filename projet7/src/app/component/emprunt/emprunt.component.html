@@ -19,8 +19,9 @@
             <td>{{ emprunt.dateEmprunt | date : "dd/MM/yyyy" }}</td>
             <td>{{ emprunt.dateRetour | date : "dd/MM/yyyy" }}</td>
             <td>
-              <a class="waves-effect waves-light btn-small" (click)="voirEmprunt(emprunt.id)">
-                <i class="material-icons right">book</i>Voir</a>
+              <!-- <a class="waves-effect waves-light btn-small" (click)="voirEmprunt(emprunt.id)"> -->
+                <a class="waves-effect waves-light btn-small" routerLink="/home/emprunt/details/{{emprunt.id}}">
+                <i class="material-icons right">book</i>Détails</a>
             </td>
           </tr>
         </tbody>

@@ -16,12 +16,12 @@ export class LoginService {
 
   authenticate(login: Login){
     console.log(login.username);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        //'Authorization': 'Bearer'
-      })
-    };
-    return this.http.post<Login>(this.loginUrl, login, httpOptions);
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':  'application/json',
+    //     //'Authorization': 'Bearer'
+    //   })
+    // };
+    return this.http.post<Login>(this.loginUrl, login);
   }
 }

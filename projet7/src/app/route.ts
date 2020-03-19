@@ -5,12 +5,14 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { ListeLivresComponent } from './component/liste-livres/liste-livres.component';
 import { EmpruntComponent } from './component/emprunt/emprunt.component';
+import { EmpruntDetailsComponent } from './emprunt-details/emprunt-details.component';
 
 export const appRoutes : Routes = [
     { 
         path: 'home', component: HomeComponent,
         children: [{ path: 'livres', component: ListeLivresComponent },
                    { path: 'emprunts', component: EmpruntComponent },
+                   { path: 'emprunt/details/:id', component: EmpruntDetailsComponent },
                    { path: '', redirectTo:'/home/livres', pathMatch: 'full' }
     ]
     },
