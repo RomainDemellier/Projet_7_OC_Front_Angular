@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ToastModule } from 'primeng/toast'; 
 
 import { AppComponent } from './app.component';
@@ -19,6 +21,9 @@ import { from } from 'rxjs';
 import { EmpruntDetailsComponent } from './emprunt-details/emprunt-details.component';
 import { TokenInterceptorService } from './service/token-interceptor.service';
 import { LivreCreationComponent } from './component/livre-creation/livre-creation.component';
+import { EmprunterModalComponent } from './component/modal/emprunter-modal/emprunter-modal.component';
+import { ListeUsagersComponent } from './liste-usagers/liste-usagers.component';
+import { UsagerEditerRoleComponent } from './usager-editer-role/usager-editer-role.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import { LivreCreationComponent } from './component/livre-creation/livre-creatio
     ListeLivresComponent,
     EmpruntComponent,
     EmpruntDetailsComponent,
-    LivreCreationComponent
+    LivreCreationComponent,
+    EmprunterModalComponent,
+    ListeUsagersComponent,
+    UsagerEditerRoleComponent
   ],
   imports: [
     BrowserModule,
@@ -39,13 +47,16 @@ import { LivreCreationComponent } from './component/livre-creation/livre-creatio
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EmprunterModalComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/service/login.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./sign-in.component.css'],
   providers: [MessageService]
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, AfterViewInit {
 
   private login: Login;
 
@@ -31,6 +31,11 @@ export class SignInComponent implements OnInit {
   })
 
   ngOnInit() {
+    this.loginService.logout();
+  }
+
+  ngAfterViewInit(){
+    //this.messageService.add({severity:'error', summary:'Echec', detail:'Désolé ça n\'a pas fonctionné.'}); 
   }
 
   onSubmit(){

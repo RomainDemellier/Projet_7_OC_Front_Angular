@@ -26,6 +26,10 @@ export class UsagerService {
     return this.http.post<UsagerRegistration>(this.apiUrl + '/create',usager);
   }
 
+  getById(id: number): Observable<Usager>{
+    return this.http.get<Usager>(this.apiUrl + '/' + id);
+  }
+
   getUsagerConnecte(): Observable<Usager> {
     // const httpOptions = {
     //   headers: new HttpHeaders({
@@ -34,5 +38,13 @@ export class UsagerService {
     //   })
     // };
     return this.http.get<Usager>(this.apiUrl + '/connecte');
+  }
+
+  getAllUsagers(): Observable<Usager[]>{
+    return this.http.get<Usager[]>(this.apiUrl);
+  }
+
+  editRole(usager: Usager): Observable<Usager>{
+    return this.http.put<Usager>(this.apiUrl + '/update/role', usager);
   }
 }

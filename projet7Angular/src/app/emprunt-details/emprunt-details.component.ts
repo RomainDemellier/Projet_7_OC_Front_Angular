@@ -13,7 +13,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EmpruntDetailsComponent implements OnInit {
 
   emprunt: Emprunt;
-  token: string;
 
   constructor(
     private empruntService: EmpruntService,
@@ -24,26 +23,25 @@ export class EmpruntDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.token = this.authorizationService.getToken();
     this.getEmprunt();
   }
 
   getEmprunt(){
     const id = +this.route.snapshot.paramMap.get('id');
-    this.empruntService.getEmpruntById(id,this.token).subscribe((emprunt) => {
+    this.empruntService.getEmpruntById(id).subscribe((emprunt) => {
       this.emprunt = emprunt;
       console.log("emprunt : " + emprunt);
     });
   }
 
   prolonger(id: number){
-    this.empruntService.prolonger(id, this.token).subscribe(() => {
+    this.empruntService.prolonger(id).subscribe(() => {
       this.router.navigate(['/home/emprunts']);
     });
   }
 
   rendre(id: number){
-    this.empruntService.rendre(id, this.token).subscribe(() => {
+    this.empruntService.rendre(id).subscribe(() => {
       this.router.navigate(['/home']);
     });
   }

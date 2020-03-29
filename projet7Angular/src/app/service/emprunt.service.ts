@@ -15,7 +15,7 @@ export class EmpruntService {
   ) { }
 
 
-  createEmprunt(emprunt: Emprunt, token: string): Observable<Emprunt>{
+  createEmprunt(emprunt: Emprunt): Observable<Emprunt>{
     // const httpOptions = {
     //   headers: new HttpHeaders({
     //     'Content-Type':  'application/json',
@@ -37,7 +37,7 @@ export class EmpruntService {
       return this.http.get<Emprunt[]>(this.apiUrl + '/usager/emprunts');
     }
 
-    getEmpruntById(id: number, token: string): Observable<Emprunt> {
+    getEmpruntById(id: number): Observable<Emprunt> {
       // const httpOptions = {
       //   headers: new HttpHeaders({
       //     'Content-Type':  'application/json',
@@ -47,7 +47,7 @@ export class EmpruntService {
       return this.http.get<Emprunt>(this.apiUrl + '/emprunt/' + id);
     }
 
-    prolonger(id: number, token: string): Observable<Emprunt>{
+    prolonger(id: number): Observable<Emprunt>{
       // const httpOptions = {
       //   headers: new HttpHeaders({
       //     'Content-Type':  'application/json',
@@ -57,7 +57,7 @@ export class EmpruntService {
       return this.http.put<any>(this.apiUrl + '/emprunt/prolonger/' + id, null);
     }
 
-    rendre(id: number, token: string): Observable<Emprunt>{
+    rendre(id: number): Observable<Emprunt>{
       // const httpOptions = {
       //   headers: new HttpHeaders({
       //     'Content-Type':  'application/json',

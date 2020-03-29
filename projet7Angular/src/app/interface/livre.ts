@@ -2,7 +2,7 @@ import { Auteur } from "./auteur";
 
 export interface Livre {
     id: number;
-    titre:String;
+    titre:string;
     auteur: Auteur;
     genre: String;
     nbreExemplaires: number;

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UsagerService } from '../../service/usager.service';
 import { LogoutService } from 'src/app/service/logout.service';
 import { Usager } from 'src/app/interface/usager';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
     private authorizationService: AuthorizationService,
     private usagerService: UsagerService,
     private logoutService: LogoutService,
+    private loginService: LoginService,
     private router: Router
   ) { }
 
@@ -40,12 +42,14 @@ export class HomeComponent implements OnInit {
     getUsagerConnecte(): void {
       this.usagerService.getUsagerConnecte().subscribe((usager) => {
         this.usagerConnecte = usager;
+        console.log("dans Home");
         console.log(this.usagerConnecte);
     });
   }
 
   logout(){
     this.authorizationService.resetToken();
+    this.loginService.logout();
     this.router.navigate(['/login']);
   }
 }
