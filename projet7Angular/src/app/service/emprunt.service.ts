@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Emprunt } from '../interface/emprunt';
+import { environment, apiUrl } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmpruntService {
 
-  private apiUrl: string = 'http://localhost:8080/api';
+  // private apiUrl: string = 'http://localhost:8080/api';
+  private apiUrl: string = apiUrl + '/api';
 
   constructor(
     private http: HttpClient

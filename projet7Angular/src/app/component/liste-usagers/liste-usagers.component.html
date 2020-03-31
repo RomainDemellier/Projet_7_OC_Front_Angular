@@ -16,11 +16,13 @@
     
           <tbody>
             <tr *ngFor="let usager of listeUsagers">
-              <td>{{ usager.prenom }}</td>
-              <td>{{ usager.nom }}</td>
+              <td><strong>{{ usager.prenom }}</strong></td>
+              <td><strong>{{ usager.nom }}</strong></td>
               <td>{{ usager.email }}</td>
               <td>{{ usager.role }}</td>
-              <td><a routerLink="/home/usager/role/{{usager.id}}" class="btn-floating btn-small blue" title="Editer le role de {{usager.prenom}}"><i class="material-icons">create</i></a></td>
+              <!-- <td><a routerLink="/home/usager/role/{{usager.id}}" class="btn-floating btn-small blue" title="Editer le role de {{usager.prenom}}"><i class="material-icons">create</i></a></td> -->
+              <td><a (click)="openDialog(usager)" class="btn-floating btn-small blue" title="Editer le role de {{usager.prenom}}"><i class="material-icons">create</i></a></td>
+
             </tr>
           </tbody>
         </table>

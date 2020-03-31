@@ -18,12 +18,16 @@ import { appRoutes } from './route';
 import { ListeLivresComponent } from './component/liste-livres/liste-livres.component';
 import { EmpruntComponent } from './component/emprunt/emprunt.component';
 import { from } from 'rxjs';
-import { EmpruntDetailsComponent } from './emprunt-details/emprunt-details.component';
+// import { EmpruntDetailsComponent } from './component/emprunt-details/emprunt-details.component';
 import { TokenInterceptorService } from './service/token-interceptor.service';
 import { LivreCreationComponent } from './component/livre-creation/livre-creation.component';
 import { EmprunterModalComponent } from './component/modal/emprunter-modal/emprunter-modal.component';
-import { ListeUsagersComponent } from './liste-usagers/liste-usagers.component';
-import { UsagerEditerRoleComponent } from './usager-editer-role/usager-editer-role.component';
+import { ListeUsagersComponent } from './component/liste-usagers/liste-usagers.component';
+import { UsagerEditerRoleComponent } from './component/usager-editer-role/usager-editer-role.component';
+import { EditerUsagerComponent } from './component/modal/editer-usager/editer-usager.component';
+import { EmpruntDetailsComponent } from './component/emprunt-details/emprunt-details.component';
+import { EditerRoleUsagerComponent } from './component/modal/editer-role-usager/editer-role-usager.component';
+import { EmpruntDetailModalComponent } from './component/modal/emprunt-detail-modal/emprunt-detail-modal.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ import { UsagerEditerRoleComponent } from './usager-editer-role/usager-editer-ro
     LivreCreationComponent,
     EmprunterModalComponent,
     ListeUsagersComponent,
-    UsagerEditerRoleComponent
+    UsagerEditerRoleComponent,
+    EditerUsagerComponent,
+    EditerRoleUsagerComponent,
+    EmpruntDetailModalComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +64,6 @@ import { UsagerEditerRoleComponent } from './usager-editer-role/usager-editer-ro
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents: [EmprunterModalComponent]
+  entryComponents: [EmprunterModalComponent, EditerUsagerComponent,EmpruntDetailsComponent,EditerUsagerComponent]
 })
 export class AppModule { }

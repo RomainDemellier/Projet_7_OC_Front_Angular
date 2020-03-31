@@ -22,7 +22,7 @@
     <a href="#" class="brand-logo" style="padding-left: 20px;">Logo</a>
     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li *ngIf="usagerConnecte"><strong><a>{{ usagerConnecte.prenom + " " + usagerConnecte.nom }}</a></strong></li>
+      <li *ngIf="usagerConnecte"><strong><a title="Votre profil" (click)="openDialog()">{{ usagerConnecte.prenom + " " + usagerConnecte.nom }}</a></strong></li>
       <li>
         <a title="Déconnexion"><i (click)="logout()" class="material-icons">settings_power</i></a>
         <!-- <a (click)="logout()">Déconnexion</a> -->
@@ -38,5 +38,5 @@
     </ul>
   </div>
 </nav>
-
+<p-toast></p-toast>
 <router-outlet></router-outlet>

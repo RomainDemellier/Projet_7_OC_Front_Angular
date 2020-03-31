@@ -21,8 +21,10 @@
             <td>
               <!-- Couleur d'origine -->
                 <!-- <a class="waves-effect waves-light btn-small" routerLink="/home/emprunt/details/{{emprunt.id}}"> -->
-                  <a class="waves-effect waves-light btn-small blue lighten-1" routerLink="/home/emprunt/details/{{emprunt.id}}">
-                <i class="material-icons right">search</i>Détails</a>
+                  <!-- <a class="waves-effect waves-light btn-small blue lighten-1" routerLink="/home/emprunt/details/{{emprunt.id}}">
+                <i class="material-icons right">search</i>Détails</a> -->
+                <a class="waves-effect waves-light btn-small blue lighten-1" (click)="openDialog(emprunt)">
+                  <i class="material-icons right">search</i>Détails</a>
             </td>
           </tr>
         </tbody>
@@ -31,3 +33,4 @@
   </div>
 </div>
 </div>
+<p-toast></p-toast>

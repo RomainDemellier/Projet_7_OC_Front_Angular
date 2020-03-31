@@ -3,13 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usager } from '../interface/usager';
 import { UsagerRegistration } from '../interface/usager-registration';
+import { environment, apiUrl } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsagerService {
 
-  private apiUrl = 'http://localhost:8080/api/usager';
+  // private apiUrl = 'http://localhost:8080/api/usager';
+  private apiUrl = apiUrl + '/api/usager';
 
   constructor(
     private http: HttpClient
@@ -46,5 +48,9 @@ export class UsagerService {
 
   editRole(usager: Usager): Observable<Usager>{
     return this.http.put<Usager>(this.apiUrl + '/update/role', usager);
+  }
+
+  editProfil(usager: Usager): Observable<Usager> {
+    return this.http.put<Usager>(this.apiUrl + '/update/profil', usager);
   }
 }

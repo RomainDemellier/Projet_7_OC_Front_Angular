@@ -5,10 +5,10 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { ListeLivresComponent } from './component/liste-livres/liste-livres.component';
 import { EmpruntComponent } from './component/emprunt/emprunt.component';
-import { EmpruntDetailsComponent } from './emprunt-details/emprunt-details.component';
+import { EmpruntDetailsComponent } from './component/emprunt-details/emprunt-details.component';
 import { LivreCreationComponent } from './component/livre-creation/livre-creation.component';
-import { ListeUsagersComponent } from './liste-usagers/liste-usagers.component';
-import { UsagerEditerRoleComponent } from './usager-editer-role/usager-editer-role.component';
+import { ListeUsagersComponent } from './component/liste-usagers/liste-usagers.component';
+import { UsagerEditerRoleComponent } from './component/usager-editer-role/usager-editer-role.component';
 
 export const appRoutes : Routes = [
     { 

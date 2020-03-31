@@ -1,0 +1,41 @@
+<div>
+    <h1 mat-dialog-title class="center-align"><a (click)="closeDialog()"
+            class="btn-floating btn-small right blue lighten-3"><i class="material-icons">close</i></a>Editer le role d'un usager</h1>
+                <!-- <div class="card">
+                    <div class="card-content">
+                        <span class="card-title center-align" *ngIf="usager">Editer le role de
+                            {{ usager.prenom + ' ' + usager.nom }}</span>
+                        <div> -->
+                            <form [formGroup]="editerRoleForm" class="" (ngSubmit)="onSubmit()" *ngIf="usager">
+                                <input type="hidden" formControlName="id">
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <input type="text" formControlName="prenom" placeholder="Firstname">
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input type="text" formControlName="nom" placeholder="Lastname">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input type="text" formControlName="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <select formControlName="role" class="col s6" style="display: block;">
+                                        <option value="USER">USER</option>
+                                        <option value="ADMIN">ADMIN</option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <button class="btn-large btn-submit" type="submit">Envoyer
+                                            <i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        <!-- </div>
+                    </div>
+                </div> -->
+</div>

@@ -1,7 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Directive } from '@angular/core';
 import { LivreService } from 'src/app/service/livre.service';
 import { Livre } from 'src/app/interface/livre';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthorizationService } from 'src/app/service/authorization.service';
 import { UsagerService } from 'src/app/service/usager.service';
 import { Emprunt } from 'src/app/interface/emprunt';
@@ -18,7 +18,7 @@ import { DialogEmpruntModalService } from 'src/app/service/dialog-emprunt-modal.
   selector: 'app-livre',
   templateUrl: './liste-livres.component.html',
   styleUrls: ['./liste-livres.component.css'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class ListeLivresComponent implements OnInit, AfterViewInit {
 
@@ -90,19 +90,5 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
         console.log("result : false");
       }
     });
-      // if(result){
-      //   this.empruntService.createEmprunt(emprunt, this.token).subscribe((emprunt) =>{
-      //     console.log("Succès");
-      //     console.log(emprunt);
-      //     if(emprunt != null){
-      //       this.messageService.add({severity:'success', summary:'Succès', detail:'Bravo vous avez emprunté un livre !'});
-      //     } else {
-      //       this.messageService.add({severity:'info', life:5000, summary:'Info', detail:'Désolé, vous êtes déjà en possession de ce livre ou ce livre est indisponible.'});
-      //     }
-      //   }, (error: HttpErrorResponse) => {
-      //     console.log("Echec");
-      //   }
-      //   );
-      // }
   }
 }

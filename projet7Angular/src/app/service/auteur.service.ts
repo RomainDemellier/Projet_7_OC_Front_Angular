@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Auteur } from '../interface/auteur';
 import { Observable } from 'rxjs';
+import { environment, apiUrl } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuteurService {
-
-  private apiUrl: string = 'http://localhost:8080/api/auteur';
+  // private apiUrl: string = 'http://localhost:8080/api/auteur';
+  private apiUrl: string = apiUrl + '/api/auteur';
 
   constructor(private http: HttpClient) { }
 

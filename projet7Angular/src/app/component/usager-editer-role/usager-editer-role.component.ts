@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Usager } from '../interface/usager';
-import { UsagerService } from '../service/usager.service';
+import { Usager } from '../../interface/usager';
+import { UsagerService } from '../../service/usager.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+// import { MessageService } from 'primeng/api/public_api';
 
 @Component({
   selector: 'app-usager-editer-role',
   templateUrl: './usager-editer-role.component.html',
-  styleUrls: ['./usager-editer-role.component.css']
+  styleUrls: ['./usager-editer-role.component.css'],
+  providers: [MessageService]
 })
 export class UsagerEditerRoleComponent implements OnInit {
 
@@ -34,7 +37,8 @@ export class UsagerEditerRoleComponent implements OnInit {
     private usagerService: UsagerService,
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -64,4 +68,7 @@ export class UsagerEditerRoleComponent implements OnInit {
     });
   }
 
+  showToast(severity, summary, detail){
+    this.messageService.add({severity: severity, summary: summary, detail: detail});
+  }
 }

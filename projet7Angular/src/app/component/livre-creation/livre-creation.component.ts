@@ -8,11 +8,13 @@ import { Auteur } from 'src/app/interface/auteur';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Livre } from 'src/app/interface/livre';
 import { onlyNumbers } from 'src/app/validators/nombre.validator';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-livre-creation',
   templateUrl: './livre-creation.component.html',
-  styleUrls: ['./livre-creation.component.css']
+  styleUrls: ['./livre-creation.component.css'],
+  providers: [MessageService]
 })
 export class LivreCreationComponent implements OnInit {
 
@@ -52,7 +54,8 @@ export class LivreCreationComponent implements OnInit {
     private fb: FormBuilder,
     private authorizationService: AuthorizationService,
     private auteurService: AuteurService,
-    private livreService: LivreService
+    private livreService: LivreService,
+    private messageService: MessageService
   ) { 
    }
 
@@ -143,5 +146,9 @@ export class LivreCreationComponent implements OnInit {
         })
       });
     }
+  }
+
+  showToast(severity, summary, detail){
+    this.messageService.add({severity: severity, summary: summary, detail: detail});
   }
 }
