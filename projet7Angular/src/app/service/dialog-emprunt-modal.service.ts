@@ -42,10 +42,12 @@ export class DialogEmpruntModalService {
   }
 
   openDialogEmpruntDetail(emprunt: Emprunt){
+    console.log("Dans emprunt detail modal");
     return this.dialog.open(EmpruntDetailModalComponent, {
       width: '450px',
       disableClose: true,
-      data: { emprunt: emprunt }
+      data: { emprunt: emprunt },
+      panelClass: 'noPadding'
     });
   }
 }
