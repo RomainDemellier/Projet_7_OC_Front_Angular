@@ -6,7 +6,7 @@ import { EmpruntService } from 'src/app/service/emprunt.service';
 @Component({
   selector: 'app-emprunt-detail-modal',
   templateUrl: './emprunt-detail-modal.component.html',
-  styleUrls: ['./emprunt-detail-modal.component.css']
+  styleUrls: ['./emprunt-detail-modal.component.scss']
 })
 export class EmpruntDetailModalComponent implements OnInit {
 

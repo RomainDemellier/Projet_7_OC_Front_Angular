@@ -6,7 +6,7 @@ import { DialogData } from 'src/app/interface/dialog-data';
 @Component({
   selector: 'app-emprunter-modal',
   templateUrl: './emprunter-modal.component.html',
-  styleUrls: ['./emprunter-modal.component.css']
+  styleUrls: ['./emprunter-modal.component.scss']
 })
 export class EmprunterModalComponent implements OnInit {
   

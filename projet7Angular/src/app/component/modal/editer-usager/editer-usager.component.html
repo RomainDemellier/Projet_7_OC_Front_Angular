@@ -1,5 +1,5 @@
 <div>
-    <h1 mat-dialog-title class="center-align"><a (click)="closeDialog()" class="btn-floating btn-small right blue lighten-3"><i class="material-icons">close</i></a>Editer votre profil</h1>
+    <h1 mat-dialog-title class="center-align"><a (click)="closeDialog()" class="btn-floating btn-small right action"><i class="material-icons">close</i></a>Editer votre profil</h1>
     <form [formGroup]="editerUsagerForm" class="col s12 white" (ngSubmit)="onSubmit()">
       <input type="hidden" formControlName="id">
         <div class="row">
@@ -29,5 +29,5 @@
           </div>
         </div>
       </form> 
-      <button class="btn yellow" (click)="activate()">Editer</button>   
+      <button class="btn blue" (click)="activate()">Editer</button>   
 </div>

@@ -1,9 +1,9 @@
-<div class="">
-  <h1 class="center-align">Les livres disponibles</h1>
+<!-- <div class="">
+  <h2 class="center-align">{{ "Les livres" | uppercase }}</h2>
 <div class="container">
   <div class="row">
     <div class="col s12">
-      <table class="striped centered bordered" *ngIf="livres">
+      <table mat-table class="striped centered bordered" *ngIf="livres">
         <thead>
           <tr>
               <th>Titre</th>
@@ -19,7 +19,7 @@
             <td>{{livre.auteur.prenom + " " + livre.auteur.nom}}</td>
             <td>{{livre.genre}}</td>
             <td *ngIf="livre.nbreExemplaires > 0">
-              <a class="waves-effect waves-light btn-small" (click)="emprunter(livre)">
+              <a mat-button class="waves-effect btn-emprunt btn-small" (click)="emprunter(livre)">
                 <i class="material-icons right">book</i>Emprunter</a>
             </td>
             <td *ngIf="livre.nbreExemplaires <= 0">Non disponible</td>
@@ -30,4 +30,44 @@
   </div>
 </div>
 </div>
+<p-toast></p-toast> -->
+
+<!-- <div class="mat-elevation-z8"> -->
+  <h1 class="title1">Les Livres</h1>
+  <div class="row filter">
+    <mat-form-field class="searchFormField col s11">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="La reine Margot">
+    </mat-form-field>
+    <div class="col s1" *ngIf="usagerConnecte && usagerConnecte.role == 'ADMIN'">
+      <a class="btn-floating creer action" title="Créer un livre" (click)="openDialog()"><i class="material-icons">add</i></a>
+    </div>
+  </div>
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">   
+    <ng-container matColumnDef="titre">
+      <mat-header-cell *matHeaderCellDef>Titre</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.titre}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="fullNameAuteur">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Auteur</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.fullNameAuteur}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="genre">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Genre</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.genre}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a *ngIf="usagerConnecte" (click)="emprunter(element)" class="btn-floating btn-small action" title="Empunter {{element.titre}}" style="margin-right: 20px;"><i class="material-icons">book</i></a>
+        <a  class="btn-floating btn-small action" title="Modifier {{element.titre}}" (click)="editerLivre(element)"><i class="material-icons">create</i></a>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" [length]="30"></mat-paginator>
+<!-- </div> -->
+
 <p-toast></p-toast>
+

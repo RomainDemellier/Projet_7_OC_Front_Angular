@@ -1,0 +1,76 @@
+<div style="padding: 25px;">
+    <h1 mat-dialog-title class="header center-align">Editer un livre <a (click)="closeDialog()"
+            class="btn-floating btn-small right action"><i class="material-icons">close</i></a></h1>
+    <form [formGroup]="livreEditionForm" class="col s12 white" (submit)="onSubmit()">
+        <input type="hidden" formControlName="id">
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" formControlName="titre" id="titre">
+                <label for="titre" class="active">Titre</label>
+                <small class="red-text" *ngIf="titre.errors?.required && titre.touched">Ce champ est
+                    requis</small>
+            </div>
+            <div class="row" style="padding-left: 12px; padding-right: 12px;">
+                <div class="input-field col s12">
+                     <input type="text" formControlName="auteur" id="auteur">
+                    <label for="auteur" class="active">Auteur</label> 
+                    <small class="red-text" *ngIf="titre.errors?.required && titre.touched">Ce champ est
+                        requis</small> 
+                </div>
+            </div>
+            <div class="input-field col s12">
+                <input type="text" formControlName="genre" id="genre">
+                <label for="genre" class="active">Genre</label>
+                <small class="red-text" *ngIf="genre.errors?.required && genre.touched">Ce champ est
+                    requis</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" formControlName="nbreExemplaires" id="nbreExemplaires">
+                <label for="nbreExemplaires" class="active">Nombre d'exemplaires disponibles</label>
+                <small class="red-text" *ngIf="nbreExemplaires.errors?.required && nbreExemplaires.touched">Ce
+                    champ est requis</small>
+                <small class="red-text"
+                    *ngIf="nbreExemplaires.errors?.onlyNumbers && !nbreExemplaires.pristine && !nbreExemplaires.errors?.required">Ne
+                    rentrez que des chiffres</small>
+            </div>
+            <div class="row">
+                
+                    <p class="col s5">
+                        <label>
+                          <input class="with-gap" formControlName="ajoutOuRetrait" name="ajoutOuRetrait" type="radio" checked value="ajout" (change)="onChange()"/>
+                          <span>Ajouter des exemplaires</span>
+                        </label>
+                      </p>
+                      <p class="col s5">
+                        <label>
+                          <input class="with-gap" formControlName="ajoutOuRetrait" name="ajoutOuRetrait" type="radio" value="retrait" (change)="onChange()"/>
+                          <span>Retirer des exemplaires</span>
+                        </label>
+                      </p>
+                
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" formControlName="nbreExemplairesAjoutRetrait" id="nbreExemplairesAjoutRetrait" placeholder="{{ texte }}">
+                    <!-- <label for="nbreExemplairesAjoutRetrait">Nombre d'exemplaires à ajouter</label> -->
+                    <small class="red-text" *ngIf="nbreExemplaires.errors?.required && nbreExemplaires.touched">Ce
+                        champ est requis</small>
+                    <small class="red-text"
+                        *ngIf="nbreExemplaires.errors?.onlyNumbers && !nbreExemplaires.pristine && !nbreExemplaires.errors?.required">Ne
+                        rentrez que des chiffres</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <button class="btn-large btn-submit" type="submit" [disabled]="!livreEditionForm.valid">Envoyer
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>

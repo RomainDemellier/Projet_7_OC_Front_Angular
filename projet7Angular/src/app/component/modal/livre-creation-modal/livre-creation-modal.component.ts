@@ -1,52 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { $ } from 'protractor';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Auteur } from 'src/app/interface/auteur';
 import { AuthorizationService } from 'src/app/service/authorization.service';
 import { AuteurService } from 'src/app/service/auteur.service';
 import { LivreService } from 'src/app/service/livre.service';
-import { Auteur } from 'src/app/interface/auteur';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Livre } from 'src/app/interface/livre';
-import { onlyNumbers } from 'src/app/validators/nombre.validator';
 import { MessageService } from 'primeng/api';
+import { onlyNumbers } from 'src/app/validators/nombre.validator';
+import { Livre } from 'src/app/interface/livre';
+import { DialogEmpruntModalService } from 'src/app/service/dialog-emprunt-modal.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { error } from 'protractor';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-livre-creation',
-  templateUrl: './livre-creation.component.html',
-  styleUrls: ['./livre-creation.component.scss'],
-  providers: [MessageService]
+  selector: 'app-livre-creation-modal',
+  templateUrl: './livre-creation-modal.component.html',
+  styleUrls: ['./livre-creation-modal.component.css']
 })
-export class LivreCreationComponent implements OnInit {
+export class LivreCreationModalComponent implements OnInit {
 
   livreCreationForm: FormGroup;
   auteurExiste: Boolean = true;
   auteurListe: Auteur[];
 
-  get titre(){
+  get titre() {
     return this.livreCreationForm.get('titre');
   }
 
-  get genre(){
+  get genre() {
     return this.livreCreationForm.get('genre');
   }
 
-  get nbreExemplaires(){
+  get nbreExemplaires() {
     return this.livreCreationForm.get('nbreExemplaires');
   }
 
-  get auteur(){
+  get auteur() {
     return this.livreCreationForm.get('auteur');
   }
 
-  get prenom(){
+  get prenom() {
     return this.livreCreationForm.get('auteurCreer').get('prenom');
   }
 
-  get nom(){
+  get nom() {
     return this.livreCreationForm.get('auteurCreer').get('nom');
   }
 
-  get estDansListe(){
+  get estDansListe() {
     return this.livreCreationForm.get('estDansListe');
   }
 
@@ -55,9 +56,10 @@ export class LivreCreationComponent implements OnInit {
     private authorizationService: AuthorizationService,
     private auteurService: AuteurService,
     private livreService: LivreService,
-    private messageService: MessageService
-  ) { 
-   }
+    public dialogRef: MatDialogRef<LivreCreationModalComponent>
+    //private messageService: MessageService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.livreCreationForm = this.fb.group({
@@ -75,7 +77,7 @@ export class LivreCreationComponent implements OnInit {
     this.estDansListe.valueChanges.subscribe(() => {
       const existe = this.estDansListe.value;
       console.log(existe);
-      if(existe === "true"){
+      if (existe === "true") {
         console.log("existe");
         this.auteur.setValidators(Validators.required);
         this.prenom.clearValidators();
@@ -96,18 +98,18 @@ export class LivreCreationComponent implements OnInit {
     }))
   }
 
-  onChange(){
+  onChange() {
     //console.log(this.estDansListe.value);
     this.auteurExiste = !this.auteurExiste;
-    if(!this.auteurExiste){
+    if (!this.auteurExiste) {
       this.auteur.disable();
     } else {
       this.auteur.enable();
     }
   }
 
-  onSubmit(){
-    if(this.auteurExiste){
+  onSubmit() {
+    if (this.auteurExiste) {
       const auteurId = +this.auteur.value;
       console.log(auteurId);
       this.auteurService.getAteurById(auteurId).subscribe((aut) => {
@@ -124,6 +126,9 @@ export class LivreCreationComponent implements OnInit {
         console.log(livre);
         this.livreService.createLivre(livre).subscribe((l) => {
           console.log(l);
+          this.dialogRef.close(true);
+        }, (error: HttpErrorResponse) => {
+          this.dialogRef.close(true);
         })
       });
     } else {
@@ -145,12 +150,16 @@ export class LivreCreationComponent implements OnInit {
         }
         this.livreService.createLivre(livre).subscribe((l) => {
           console.log(l);
-        })
+          this.dialogRef.close(true);
+        }, (error: HttpErrorResponse) => {
+          this.dialogRef.close(false);
+        });
       });
     }
   }
+  
 
-  showToast(severity, summary, detail){
-    this.messageService.add({severity: severity, summary: summary, detail: detail});
+  closeDialog() {
+    this.dialogRef.close("exit");
   }
 }

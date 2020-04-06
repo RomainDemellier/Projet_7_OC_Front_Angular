@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, Directive } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Directive, ViewChild } from '@angular/core';
 import { LivreService } from 'src/app/service/livre.service';
 import { Livre } from 'src/app/interface/livre';
 import { Observable, Subject } from 'rxjs';
@@ -13,18 +13,25 @@ import { LoginService } from 'src/app/service/login.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EmprunterModalComponent } from '../modal/emprunter-modal/emprunter-modal.component';
 import { DialogEmpruntModalService } from 'src/app/service/dialog-emprunt-modal.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+//import { DataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-livre',
   templateUrl: './liste-livres.component.html',
-  styleUrls: ['./liste-livres.component.css'],
+  styleUrls: ['./liste-livres.component.scss'],
   providers: [MessageService],
 })
 export class ListeLivresComponent implements OnInit, AfterViewInit {
 
   livres: Livre[];
-  //token: string;
+  dataSource: MatTableDataSource<Livre>;
+  displayedColumns: string[] = ['titre', 'fullNameAuteur', 'genre', 'actions'];
   usagerConnecte: Usager;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(
     private livreService: LivreService,
@@ -49,7 +56,18 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
   }
 
   getLivres(): void {
-    this.livreService.getLivresDisponibles().subscribe(livres => this.livres = livres);
+    this.livreService.getLivresDisponibles().subscribe(livres => { 
+      this.livres = livres;
+      console.log(this.livres);
+      this.dataSource = new MatTableDataSource(this.livres);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.filterPredicate = function(data, filter: string): boolean {
+        return data.titre.toLowerCase().includes(filter) || data.fullNameAuteur.toLowerCase().includes(filter) || data.genre.toLowerCase().includes(filter);
+    };
+      console.log("Coucou");
+    }
+      );
   }
 
   getUsagerConnecte(): void {
@@ -77,17 +95,47 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
         this.empruntService.createEmprunt(emprunt).subscribe((emprunt) =>{
           console.log("Succès");
           console.log(emprunt);
-          if(emprunt != null){
             this.messageService.add({severity:'success', summary:'Succès', detail:'Bravo vous avez emprunté un livre !'});
-          } else {
-            this.messageService.add({severity:'info', life:5000, summary:'Info', detail:'Désolé, vous êtes déjà en possession de ce livre ou ce livre est indisponible.'});
-          }
+          
         }, (error: HttpErrorResponse) => {
           console.log("Echec");
+          console.log(error.status);
+          this.messageService.add({severity:'warn', life:5000, summary:'Info', detail:'Désolé, vous êtes déjà en possession de ce livre ou ce livre est indisponible.'});
         }
         );
       } else {
         console.log("result : false");
+      }
+    });
+  }
+
+  applyFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  openDialog(){
+    this.dialogService.openDialogCreationLivre().afterClosed().subscribe((res) => {
+      if(res != "exit"){
+        if(res) {
+          this.getLivres();
+          this.messageService.add({ severity: "success", summary: "Création Ok", detail: "La création du livre a été faite avec succès" });
+        } else {
+          this.messageService.add({ severity: "error", summary: "Echec de la création du livre", detail: "Désolé, ça n'a pas fonctionné." });
+        }
+      }
+    });
+  }
+
+  editerLivre(livre){
+    this.dialogService.openDialogEditLivre(livre).afterClosed().subscribe((res) => {
+      if(res != "exit"){
+        if(res) {
+          this.getLivres();
+          this.messageService.add({ severity: "success", summary: "Modification Ok", detail: "La modification du livre a été faite avec succès" });
+        } else {
+          this.messageService.add({ severity: "error", summary: "Echec de la modification du livre", detail: "Désolé, ça n'a pas fonctionné." });
+        }
       }
     });
   }

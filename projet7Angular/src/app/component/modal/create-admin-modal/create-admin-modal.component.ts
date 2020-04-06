@@ -1,22 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm, Validators } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthorizationService } from 'src/app/service/authorization.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UsagerService } from 'src/app/service/usager.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { emailValidator } from 'src/app/validators/email.validator';
 import { passwordValidator } from 'src/app/validators/password.validator';
-import { environment } from 'src/environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  selector: 'app-create-admin-modal',
+  templateUrl: './create-admin-modal.component.html',
+  styleUrls: ['./create-admin-modal.component.css']
 })
-export class SignUpComponent implements OnInit {
+export class CreateAdminModalComponent implements OnInit {
 
-  // private usager: Usager = new Usager() ;
+  registrationForm: FormGroup;
+
   get nom(){
     return this.registrationForm.get('nom');
   }
@@ -38,28 +37,39 @@ export class SignUpComponent implements OnInit {
   }
 
   constructor(
-    private usagerService: UsagerService,
     private fb: FormBuilder,
-    private router: Router) { }
+    private authorizationService: AuthorizationService,
+    private usagerService: UsagerService,
+    public dialogRef: MatDialogRef<CreateAdminModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data
+  ) { }
 
-    registrationForm = this.fb.group({
+  ngOnInit(): void {
+    this.registrationForm = this.fb.group({
       nom: ['', [Validators.required, Validators.maxLength(15)]],
       prenom: ['', [Validators.required, Validators.maxLength(15)]],
       email: ['', [Validators.required, emailValidator(/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
       confirmPassword: ['']
     }, { validator: passwordValidator });
-
-  ngOnInit() {
   }
 
+
+
   onSubmit(){
-    this.usagerService.createUsager(this.registrationForm.value).subscribe(() => {
+    this.usagerService.createAdmin(this.registrationForm.value).subscribe(() => {
       console.log("Succès");
-      this.router.navigate([('/login')]);
+      //this.router.navigate([('/login')]);
+      this.dialogRef.close(true);
 
     }, (err: HttpErrorResponse) => {
       console.log("Echec");
+      this.dialogRef.close(false);
     });
   }
+
+  closeDialog(){
+    this.dialogRef.close("exit");
+  }
+
 }

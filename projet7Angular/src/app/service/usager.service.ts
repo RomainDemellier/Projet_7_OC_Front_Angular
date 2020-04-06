@@ -28,6 +28,10 @@ export class UsagerService {
     return this.http.post<UsagerRegistration>(this.apiUrl + '/create',usager);
   }
 
+  createAdmin(admin: UsagerRegistration): Observable<any> {
+    return this.http.post<UsagerRegistration>(this.apiUrl + '/createAdmin',admin);
+  }
+
   getById(id: number): Observable<Usager>{
     return this.http.get<Usager>(this.apiUrl + '/' + id);
   }

@@ -27,4 +27,8 @@ export class LivreService {
   createLivre(livre: Livre): Observable<Livre> {
     return this.http.post<Livre>(this.apiUrl + '/create', livre);
   }
+
+  editNbreExemplaires(livre: Livre): Observable<Livre> {
+    return this.http.put<Livre>(this.apiUrl + '/editNbreExemplaires', livre);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Emprunt } from 'src/app/interface/emprunt';
 import { Usager } from 'src/app/interface/usager';
 import { UsagerService } from 'src/app/service/usager.service';
@@ -6,12 +6,15 @@ import { AuthorizationService } from 'src/app/service/authorization.service';
 import { EmpruntService } from 'src/app/service/emprunt.service';
 import { MessageService } from 'primeng/api';
 import { DialogEmpruntModalService } from 'src/app/service/dialog-emprunt-modal.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 // import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-emprunt',
   templateUrl: './emprunt.component.html',
-  styleUrls: ['./emprunt.component.css'],
+  styleUrls: ['./emprunt.component.scss'],
   providers: [MessageService]
 })
 export class EmpruntComponent implements OnInit {
@@ -19,6 +22,10 @@ export class EmpruntComponent implements OnInit {
   emprunts: Emprunt[];
   token: string;
   usagerConnecte: Usager;
+  dataSource: MatTableDataSource<Emprunt>;
+  displayedColumns: string[] = ['titre', 'dateEmprunt', 'dateRetour', 'actions'];
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(
     private empruntService: EmpruntService,
@@ -45,6 +52,12 @@ export class EmpruntComponent implements OnInit {
   getEmpruntsUsagerConnecte(){
     this.empruntService.getEmpruntsUsagerConnecte(this.token).subscribe((emprunts) => {
       this.emprunts = emprunts;
+      this.dataSource = new MatTableDataSource(emprunts);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.dataSource.filterPredicate = function(data, filter: string): boolean {
+        return data.livre.titre.toLowerCase().includes(filter);
+    };
       console.log("Succès");
     });
   }
@@ -66,5 +79,10 @@ export class EmpruntComponent implements OnInit {
         this.messageService.add({severity: 'warn', summary: 'Problème retour', detail: 'Le livre ' + emprunt.livre.titre.toUpperCase() + ' n\'a pu être rendu.'});
       }
     })
+  }
+
+  applyFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

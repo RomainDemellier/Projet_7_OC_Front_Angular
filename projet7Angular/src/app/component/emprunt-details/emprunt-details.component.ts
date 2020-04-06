@@ -10,7 +10,7 @@ import { EmpruntService } from 'src/app/service/emprunt.service';
 @Component({
   selector: 'app-emprunt-details',
   templateUrl: './emprunt-details.component.html',
-  styleUrls: ['./emprunt-details.component.css'],
+  styleUrls: ['./emprunt-details.component.scss'],
   providers: [MessageService]
 })
 export class EmpruntDetailsComponent implements OnInit {

@@ -7,7 +7,7 @@ import { UsagerService } from 'src/app/service/usager.service';
 @Component({
   selector: 'app-editer-role-usager',
   templateUrl: './editer-role-usager.component.html',
-  styleUrls: ['./editer-role-usager.component.css']
+  styleUrls: ['./editer-role-usager.component.scss']
 })
 export class EditerRoleUsagerComponent implements OnInit {
 

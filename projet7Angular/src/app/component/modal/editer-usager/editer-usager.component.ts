@@ -9,7 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-editer-usager',
   templateUrl: './editer-usager.component.html',
-  styleUrls: ['./editer-usager.component.css']
+  styleUrls: ['./editer-usager.component.scss']
 })
 export class EditerUsagerComponent implements OnInit {
 

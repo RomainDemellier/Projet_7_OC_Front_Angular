@@ -6,4 +6,5 @@ export interface Livre {
     auteur: Auteur;
     genre: String;
     nbreExemplaires: number;
+    fullNameAuteur: string;
 }

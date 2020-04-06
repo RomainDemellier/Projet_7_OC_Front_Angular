@@ -9,7 +9,7 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-usager-editer-role',
   templateUrl: './usager-editer-role.component.html',
-  styleUrls: ['./usager-editer-role.component.css'],
+  styleUrls: ['./usager-editer-role.component.scss'],
   providers: [MessageService]
 })
 export class UsagerEditerRoleComponent implements OnInit {

@@ -1,20 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 // import { UsagerService } from '../../service/usager.service';
 import { Usager } from '../../interface/usager';
 import { MessageService } from 'primeng/api';
 import { UsagerService } from 'src/app/service/usager.service';
 import { DialogEmpruntModalService } from 'src/app/service/dialog-emprunt-modal.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-liste-usagers',
   templateUrl: './liste-usagers.component.html',
-  styleUrls: ['./liste-usagers.component.css'],
+  styleUrls: ['./liste-usagers.component.scss'],
   providers: [MessageService]
 })
 export class ListeUsagersComponent implements OnInit {
 
   listeUsagers: Usager[];
   usagerConnecte: Usager;
+  dataSource: MatTableDataSource<Usager>;
+  displayedColumns: string[] = ['nom', 'prenom', 'email', 'role', 'actions'];
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(
     private usagerService: UsagerService,
@@ -36,6 +43,13 @@ export class ListeUsagersComponent implements OnInit {
   getAllUsagers(){
     this.usagerService.getAllUsagers().subscribe((usagers) => {
       this.listeUsagers = usagers;
+      this.dataSource = new MatTableDataSource(usagers);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.filterPredicate = function(data, filter: string): boolean {
+        return data.nom.toLowerCase().includes(filter) || data.prenom.toLowerCase().includes(filter)
+         || data.email.toString().includes(filter) || data.role.toLowerCase().includes(filter);
+    };
     })
   }
 
@@ -46,5 +60,24 @@ export class ListeUsagersComponent implements OnInit {
         this.getAllUsagers();
       }
     });
+  }
+
+  openDialogCreateAdmin(){
+    this.dialogService.openDialogCreateAdmin().afterClosed()
+    .subscribe((res) => {
+      if(res != "exit"){
+        if(res){
+          this.getAllUsagers();
+          this.messageService.add({ severity: 'success', summary: 'Création d\'un administrateur', detail: 'La création de l\'administrateur a été effectuée avec succès.' })
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Echec de la création d\'un administrateur', detail: 'Désolé, ça n\'a pas fonctionné.' })
+        }
+      }
+    })
+  }
+
+  applyFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

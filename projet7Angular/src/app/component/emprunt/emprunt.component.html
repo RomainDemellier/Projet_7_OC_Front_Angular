@@ -1,4 +1,4 @@
-<div class="">
+<!-- <div class="">
   <h1 class="center-align">Vos emprunts</h1>
 <div class="container">
   <div class="row">
@@ -19,10 +19,6 @@
             <td>{{ emprunt.dateEmprunt | date : "dd/MM/yyyy" }}</td>
             <td>{{ emprunt.dateRetour | date : "dd/MM/yyyy" }}</td>
             <td>
-              <!-- Couleur d'origine -->
-                <!-- <a class="waves-effect waves-light btn-small" routerLink="/home/emprunt/details/{{emprunt.id}}"> -->
-                  <!-- <a class="waves-effect waves-light btn-small blue lighten-1" routerLink="/home/emprunt/details/{{emprunt.id}}">
-                <i class="material-icons right">search</i>Détails</a> -->
                 <a class="waves-effect waves-light btn-small blue lighten-1" (click)="openDialog(emprunt)">
                   <i class="material-icons right">search</i>Détails</a>
             </td>
@@ -32,5 +28,38 @@
     </div>
   </div>
 </div>
+</div> -->
+
+<h1 class="title1">Vos emprunts</h1>
+<div class="row filter">
+  <mat-form-field class="searchFormField col s11">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Titre">
+  </mat-form-field>
 </div>
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+   <ng-container matColumnDef="titre">
+     <mat-header-cell *matHeaderCellDef>Titre</mat-header-cell>
+     <mat-cell *matCellDef="let element">{{ element.livre.titre }}</mat-cell>
+   </ng-container>
+   <ng-container matColumnDef="dateEmprunt">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Date d'emprunt</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.dateEmprunt | date: "dd/MM/yyyy" }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="dateRetour">
+    <mat-header-cell *matHeaderCellDef>Date retour</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.dateRetour | date: "dd/MM/yyyy" }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <a class="btn-floating btn-small action" (click)="openDialog(element)">
+        <i class="material-icons">search</i>Détails</a>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" [length]="30"></mat-paginator>
+
 <p-toast></p-toast>

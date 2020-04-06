@@ -15,7 +15,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
   providers: [MessageService]
 })
 export class HomeComponent implements OnInit {
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.token = this.authorizationService.getToken();
     if (this.token == '') {
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
     } else {
       this.getUsagerConnecte();
     }
