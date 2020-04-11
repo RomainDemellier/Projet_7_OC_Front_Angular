@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { Usager } from '../interface/usager';
 import { UsagerRegistration } from '../interface/usager-registration';
 import { environment, apiUrl } from 'src/environments/environment';
+import { AuthorizationService } from './authorization.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class UsagerService {
   private apiUrl = apiUrl + '/api/usager';
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authorizeService: AuthorizationService
   ) { }
 
   createUsager(usager: UsagerRegistration): Observable<any> {
@@ -37,13 +39,11 @@ export class UsagerService {
   }
 
   getUsagerConnecte(): Observable<Usager> {
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json',
-    //     'Authorization': 'Bearer ' + token
-    //   })
-    // };
-    return this.http.get<Usager>(this.apiUrl + '/connecte');
+    if(this.authorizeService.getToken() === ''){
+      return EMPTY;
+    } else {
+      return this.http.get<Usager>(this.apiUrl + '/connecte');
+    } 
   }
 
   getAllUsagers(): Observable<Usager[]>{

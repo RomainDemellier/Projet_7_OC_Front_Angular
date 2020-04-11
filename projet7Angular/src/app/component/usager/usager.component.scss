@@ -7,12 +7,12 @@ $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
 
-.active {
+.activated {
     //background-color: white;
     background-color: $primary-color-dark !important;
 }
 
-.active:hover {
+.activated:hover {
     background-color: $primary-color-dark !important;
 }
 
@@ -24,3 +24,6 @@ $divider-color:        #BDBDBD;
     background-color: $primary-color !important;
 }
 
+// .btn-large.test {
+//     background-color: ;
+// }

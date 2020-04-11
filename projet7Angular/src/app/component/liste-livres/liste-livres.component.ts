@@ -18,6 +18,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 //import { DataSource } from '@angular/material/table';
 
+// function initializeActionButton(){
+//   var elems = document.querySelectorAll('.fixed-action-btn');
+//   var instances = M.FloatingActionButton.init(elems);
+// }
+
 @Component({
   selector: 'app-livre',
   templateUrl: './liste-livres.component.html',
@@ -28,7 +33,7 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
 
   livres: Livre[];
   dataSource: MatTableDataSource<Livre>;
-  displayedColumns: string[] = ['titre', 'fullNameAuteur', 'genre', 'actions'];
+  displayedColumns: string[] = ['titre', 'fullNameAuteur', 'genre', 'nbreExemplaires'];
   usagerConnecte: Usager;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -47,12 +52,14 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     
     //this.token = this.authorizationService.getToken();
+    
     this.getLivres();
     this.getUsagerConnecte();
   }
 
   ngAfterViewInit(){
     // this.messageService.add({severity:'success', summary:'Bienvenue', detail:''}); 
+    //initializeActionButton();
   }
 
   getLivres(): void {
@@ -73,6 +80,7 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
   getUsagerConnecte(): void {
     this.usagerService.getUsagerConnecte().subscribe((usager) => {
       this.usagerConnecte = usager;
+      this.displayedColumns = ['titre', 'fullNameAuteur', 'genre', 'nbreExemplaires', 'actions'];
       console.log("usagerConnecte");
       console.log(this.usagerConnecte);
       const allReadyLogged: Boolean = this.loginService.isAllReadyLogged();

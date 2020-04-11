@@ -30,14 +30,15 @@
 </div>
 </div> -->
 
-<h1 class="title1">Vos emprunts</h1>
-<div class="row filter">
-  <mat-form-field class="searchFormField col s11">
+<h1 class="title1" *ngIf="emprunts">Vos emprunts</h1>
+<h1 class="title1" *ngIf="!emprunts">Vous n'avez pas d'emprunts</h1>
+<div class="row filter" *ngIf="emprunts">
+  <mat-form-field class="searchFormField col s12">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Titre">
   </mat-form-field>
 </div>
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="emprunts" matSort>
    <ng-container matColumnDef="titre">
      <mat-header-cell *matHeaderCellDef>Titre</mat-header-cell>
      <mat-cell *matCellDef="let element">{{ element.livre.titre }}</mat-cell>
@@ -60,6 +61,6 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>
-<mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" [length]="30"></mat-paginator>
+<mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" [length]="30" *ngIf="emprunts"></mat-paginator>
 
 <p-toast></p-toast>

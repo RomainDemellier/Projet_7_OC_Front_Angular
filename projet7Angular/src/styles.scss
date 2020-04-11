@@ -59,7 +59,8 @@ mat-table {
 
   .searchFormField input:focus {
     outline-offset: 0px;
-    border-bottom: 1px solid $primary-color-dark !important;
+    border-bottom: 1px solid black !important;
+    box-shadow: 0 0px 0 0 $secondary-text-color !important;
   }
 
 //   ::ng-deep .mat-form-field-underline {
@@ -73,6 +74,10 @@ mat-table {
 
 .mat-form-field:focus {
     appearance: none !important;
+}
+
+.mat-form-field-label {
+  color: $secondary-text-color !important;
 }
 
 
@@ -93,9 +98,19 @@ mat-table {
   }
 
   .action:hover {
-    background-color: $primary-text-color;
+    background-color: $primary-text-color !important;
   }
 
   .action:hover i{
-    color: $primary-color-text;
+    color: $primary-color-text !important;
   }
+
+  .action:focus {
+    background-color: $primary-color-text;
+    color: $primary-text-color;
+  }
+
+  .btn-large {
+    background-color: $primary-color !important;
+  }
+

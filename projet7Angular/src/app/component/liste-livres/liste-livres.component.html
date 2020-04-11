@@ -35,7 +35,7 @@
 <!-- <div class="mat-elevation-z8"> -->
   <h1 class="title1">Les Livres</h1>
   <div class="row filter">
-    <mat-form-field class="searchFormField col s11">
+    <mat-form-field class="searchFormField col" [class.s12]="!usagerConnecte || usagerConnecte.role=='USER'" [class.s11]="usagerConnecte && usagerConnecte.role=='ADMIN'">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="La reine Margot">
     </mat-form-field>
@@ -56,11 +56,17 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>Genre</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.genre}}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="nbreExemplaires">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre d'exemplaires</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.nbreExemplaires}}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <a *ngIf="usagerConnecte" (click)="emprunter(element)" class="btn-floating btn-small action" title="Empunter {{element.titre}}" style="margin-right: 20px;"><i class="material-icons">book</i></a>
-        <a  class="btn-floating btn-small action" title="Modifier {{element.titre}}" (click)="editerLivre(element)"><i class="material-icons">create</i></a>
+        <!-- <a *ngIf="usagerConnecte" [disabled]="element.nbreExemplaires <= 0 " (click)="emprunter(element)" class="btn-floating btn-small action" title="Empunter {{element.titre}}" style="margin-right: 20px;"><i class="material-icons">book</i></a> -->
+        <!-- <a  class="btn-floating btn-small action" title="Modifier {{element.titre}}" (click)="editerLivre(element)"><i class="material-icons">create</i></a> -->
+        <button *ngIf="usagerConnecte" [disabled]="element.nbreExemplaires <= 0 " (click)="emprunter(element)" class="btn-floating btn-small action" title="Empunter {{element.titre}}" style="margin-right: 20px;"><i class="material-icons">book</i></button>
+        <button  class="btn-floating btn-small action" title="Modifier {{element.titre}}" (click)="editerLivre(element)"><i class="material-icons">create</i></button>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -71,3 +77,15 @@
 
 <p-toast></p-toast>
 
+
+<!-- <div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+    <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+    <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+    <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+  </ul>
+</div> -->
