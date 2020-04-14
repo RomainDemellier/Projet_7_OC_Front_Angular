@@ -9,6 +9,7 @@ import { EmpruntDetailsComponent } from './component/emprunt-details/emprunt-det
 import { LivreCreationComponent } from './component/livre-creation/livre-creation.component';
 import { ListeUsagersComponent } from './component/liste-usagers/liste-usagers.component';
 import { UsagerEditerRoleComponent } from './component/usager-editer-role/usager-editer-role.component';
+import { ListeEmpruntsComponent } from './component/liste-emprunts/liste-emprunts.component';
 
 export const appRoutes : Routes = [
     { 
@@ -19,6 +20,7 @@ export const appRoutes : Routes = [
                    { path: 'usager/role/:id', component: UsagerEditerRoleComponent },
                    { path: 'emprunt/details/:id', component: EmpruntDetailsComponent },
                    { path: 'livre-creation', component: LivreCreationComponent },
+                   { path: 'allEmprunts', component: ListeEmpruntsComponent },
                    { path: '', redirectTo:'/home/livres', pathMatch: 'full' }
     ]
     },
@@ -31,5 +33,5 @@ export const appRoutes : Routes = [
         path: 'login', component: UsagerComponent,
         children: [{ path: '', component: SignInComponent }]
     },
-    { path: '', redirectTo:'/login', pathMatch: 'full' }
+    { path: '', redirectTo:'/home/livres', pathMatch: 'full' }
 ];

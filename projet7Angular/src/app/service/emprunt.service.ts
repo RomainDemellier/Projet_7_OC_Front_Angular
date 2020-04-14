@@ -27,6 +27,10 @@ export class EmpruntService {
     
     return this.http.post<Emprunt>(this.apiUrl + '/emprunt/create', emprunt);
   }
+
+  getAllEmprunts(): Observable<Emprunt[]> {
+    return this.http.get<Emprunt[]>(this.apiUrl + '/emprunt');
+  }
   
   getEmpruntsUsagerConnecte(token: string): Observable<Emprunt[]> {
       // const httpOptions = {

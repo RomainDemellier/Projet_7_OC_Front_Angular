@@ -19,7 +19,7 @@ export class ListeUsagersComponent implements OnInit {
   listeUsagers: Usager[];
   usagerConnecte: Usager;
   dataSource: MatTableDataSource<Usager>;
-  displayedColumns: string[] = ['nom', 'prenom', 'email', 'role', 'actions'];
+  displayedColumns: string[] = ['nom', 'email', 'role', 'actions'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -47,7 +47,7 @@ export class ListeUsagersComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.dataSource.filterPredicate = function(data, filter: string): boolean {
-        return data.nom.toLowerCase().includes(filter) || data.prenom.toLowerCase().includes(filter)
+        return (data.prenom + ' ' + data.nom).toLowerCase().includes(filter)
          || data.email.toString().includes(filter) || data.role.toLowerCase().includes(filter);
     };
     })

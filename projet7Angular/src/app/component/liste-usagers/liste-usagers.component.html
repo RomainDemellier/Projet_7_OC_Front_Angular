@@ -44,19 +44,19 @@
     <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">   
       <ng-container matColumnDef="nom">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.nom}}</mat-cell>
+        <mat-cell *matCellDef="let element"><strong>{{element.prenom}} &nbsp;&nbsp; {{element.nom}}</strong></mat-cell>
       </ng-container>
-      <ng-container matColumnDef="prenom">
+      <!-- <ng-container matColumnDef="prenom">
         <mat-header-cell *matHeaderCellDef>Prénom</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.prenom}}</mat-cell>
-      </ng-container>
+      </ng-container> -->
       <ng-container matColumnDef="email">
         <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
         <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="role">
         <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.role}}</mat-cell>
+        <mat-cell *matCellDef="let element"><strong>{{element.role}}</strong></mat-cell>
       </ng-container>
       <ng-container matColumnDef="actions" >
         <mat-header-cell *matHeaderCellDef class="actions"></mat-header-cell>

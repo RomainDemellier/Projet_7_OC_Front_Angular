@@ -21,12 +21,14 @@
   <nav class="nav-extended">
   <div class="nav-wrapper">
     <a href="#" class="brand-logo text-color" style="padding-left: 20px; padding-right: 20px;">Logo</a>
-    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
+    <!-- <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+    <!-- <ul id="nav-mobile" class="right hide-on-med-and-down"> -->
+      <ul id="nav-mobile" class="right">
       <li *ngIf="usagerConnecte"><strong><a style="font-size: 20px;" title="Votre profil" (click)="openDialog()">{{ usagerConnecte.prenom + " " + usagerConnecte.nom }}</a></strong></li>
       <li *ngIf="!usagerConnecte"><strong><a routerLink='/login' style="font-size: 20px;" title="Se connecter">Connexion</a></strong></li>
       <li>
-        <a title="Déconnexion"><i (click)="logout()" class="material-icons">settings_power</i></a>
+        <a *ngIf="usagerConnecte" title="Déconnexion"><i (click)="logout()" class="material-icons">settings_power</i></a>
+        <strong><a *ngIf="!usagerConnecte" routerLink='/signup' style="font-size: 20px;" title="Se connecter">S'inscrire</a></strong>
         <!-- <a (click)="logout()">Déconnexion</a> -->
       </li>
     </ul>
@@ -35,6 +37,7 @@
     <ul class="tabs tabs-transparent">
       <li class="tab"><a routerLink='/home/livres' routerLinkActive="activeRoute">Les livres</a></li>
       <li class="tab"><a routerLink='/home/emprunts' routerLinkActive="activeRoute">Vos emprunts</a></li>
+      <li class="tab"><a routerLink='/home/allEmprunts' routerLinkActive="activeRoute">Tous les emprunts</a></li>
       <li class="tab"><a routerLink='/home/livre-creation' routerLinkActive="activeRoute">Créer un livre</a></li>
       <li class="tab"><a routerLink='/home/usagers' routerLinkActive="activeRoute">Les usagers</a></li>
     </ul>

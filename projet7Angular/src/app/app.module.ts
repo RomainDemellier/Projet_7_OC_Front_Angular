@@ -36,6 +36,7 @@ import { EmpruntDetailModalComponent } from './component/modal/emprunt-detail-mo
 import { LivreCreationModalComponent } from './component/modal/livre-creation-modal/livre-creation-modal.component';
 import { LivreEditerModalComponent } from './component/modal/livre-editer-modal/livre-editer-modal.component';
 import { CreateAdminModalComponent } from './component/modal/create-admin-modal/create-admin-modal.component';
+import { ListeEmpruntsComponent } from './component/liste-emprunts/liste-emprunts.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { CreateAdminModalComponent } from './component/modal/create-admin-modal/
     EmpruntDetailModalComponent,
     LivreCreationModalComponent,
     LivreEditerModalComponent,
-    CreateAdminModalComponent
+    CreateAdminModalComponent,
+    ListeEmpruntsComponent
   ],
   imports: [
     BrowserModule,
