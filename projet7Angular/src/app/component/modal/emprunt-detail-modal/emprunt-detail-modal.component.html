@@ -9,9 +9,12 @@
         <p><strong>Date de retour: </strong>{{ emprunt.dateRetour | date : 'dd/MM/yyyy' }}</p>
     </div>
     <div class="card-action center-align" style="padding: 8px;">
-        <div class="row" style="margin: 0;">
+        <div class="row" style="margin: 0;" *ngIf="!emprunt.prolonge">
             <a class="btn col s4 offset-s1 empruntAction" (click)="prolonger()">Prolonger</a>
             <a class="btn col s4 offset-s1 empruntAction" (click)="rendre()">Rendre</a>
+        </div>
+        <div class="row" style="margin: 0;" *ngIf="emprunt.prolonge">
+            <a class="btn col s4 offset-s4 empruntAction" (click)="rendre()">Rendre</a>
         </div>
     </div>
 </div>

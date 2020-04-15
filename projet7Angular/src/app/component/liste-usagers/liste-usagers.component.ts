@@ -7,6 +7,8 @@ import { DialogEmpruntModalService } from 'src/app/service/dialog-emprunt-modal.
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-liste-usagers',
@@ -26,6 +28,7 @@ export class ListeUsagersComponent implements OnInit {
   constructor(
     private usagerService: UsagerService,
     private messageService: MessageService,
+    private router: Router,
     private dialogService: DialogEmpruntModalService
   ) { }
 
@@ -37,6 +40,11 @@ export class ListeUsagersComponent implements OnInit {
   getUsagerConnecte(): void {
     this.usagerService.getUsagerConnecte().subscribe((usager) => {
       this.usagerConnecte = usager;
+      if(this.usagerConnecte.role != 'ADMIN'){
+        this.router.navigate(['/login']);
+      }
+    }, (error: HttpErrorResponse) => {
+      this.router.navigate(['/login']);
     });
   }
 

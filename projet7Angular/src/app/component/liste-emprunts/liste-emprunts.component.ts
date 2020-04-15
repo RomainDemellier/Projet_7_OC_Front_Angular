@@ -5,6 +5,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmpruntService } from 'src/app/service/emprunt.service';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
+import { UsagerService } from 'src/app/service/usager.service';
+import { Usager } from 'src/app/interface/usager';
+import { HttpErrorResponse } from '@angular/common/http';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-liste-emprunts',
@@ -13,6 +18,7 @@ import { formatDate } from '@angular/common';
 })
 export class ListeEmpruntsComponent implements OnInit {
 
+  usagerConnecte: Usager;
   emprunts: Emprunt[];
   dataSource: MatTableDataSource<Emprunt>;
   displayedColumns: string[] = ['emprunteur', 'titre', 'dateEmprunt', 'dateRetour', 'actif'];
@@ -20,11 +26,28 @@ export class ListeEmpruntsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(
-    private empruntService: EmpruntService
+    private usagerService: UsagerService,
+    private empruntService: EmpruntService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.getUsagerConnecte();
     this.getAllEmprunts();
+  }
+
+  getUsagerConnecte(){
+    console.log("Dans usagerConnecte")
+    this.usagerService.getUsagerConnecte().subscribe((usager) => {
+
+      this.usagerConnecte = usager;
+      if(this.usagerConnecte.role != 'ADMIN'){
+        this.router.navigate(['/login']);
+      }
+    }, (error: HttpErrorResponse) => {
+      console.log("Echec");
+      this.router.navigate(['/login']);
+    });
   }
 
   getAllEmprunts(){
