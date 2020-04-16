@@ -10,7 +10,7 @@ import { EmpruntService } from 'src/app/service/emprunt.service';
 })
 export class EmpruntDetailModalComponent implements OnInit {
 
-  emprunt: Emprunt;
+  public emprunt: Emprunt;
 
   constructor(
     private empruntService: EmpruntService,
@@ -22,7 +22,7 @@ export class EmpruntDetailModalComponent implements OnInit {
     this.emprunt = this.data.emprunt;
   }
 
-  prolonger() {
+  public prolonger(): void {
     if (this.emprunt.prolonge) {
       this.dialogRef.close("prolongationPasOk");
     } else {
@@ -34,14 +34,13 @@ export class EmpruntDetailModalComponent implements OnInit {
 
   }
 
-  rendre() {
-    this.empruntService.rendre(this.emprunt.id).subscribe((emprunt) => {
-      //this.router.navigate(['/home']);
-      this.dialogRef.close("rendreOk");
-    });
+  public rendre(): void {
+    this.empruntService.rendre(this.emprunt.id).subscribe((emprunt) => 
+      this.dialogRef.close("rendreOk")
+    );
   }
 
-  closeDialog() {
+  public closeDialog(): void {
     this.dialogRef.close("exit");
   }
 }

@@ -17,59 +17,27 @@ export class EmpruntService {
   ) { }
 
 
-  createEmprunt(emprunt: Emprunt): Observable<Emprunt>{
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json',
-    //     'Authorization': 'Bearer ' + token
-    //   })
-    // };
-    
+  public createEmprunt(emprunt: Emprunt): Observable<Emprunt>{
     return this.http.post<Emprunt>(this.apiUrl + '/emprunt/create', emprunt);
   }
 
-  getAllEmprunts(): Observable<Emprunt[]> {
+  public getAllEmprunts(): Observable<Emprunt[]> {
     return this.http.get<Emprunt[]>(this.apiUrl + '/emprunt');
   }
   
-  getEmpruntsUsagerConnecte(token: string): Observable<Emprunt[]> {
-      // const httpOptions = {
-      //   headers: new HttpHeaders({
-      //     'Content-Type':  'application/json',
-      //     'Authorization': 'Bearer ' + token
-      //   })
-      // };
-
+  public getEmpruntsUsagerConnecte(): Observable<Emprunt[]> {
       return this.http.get<Emprunt[]>(this.apiUrl + '/usager/emprunts');
     }
 
-    getEmpruntById(id: number): Observable<Emprunt> {
-      // const httpOptions = {
-      //   headers: new HttpHeaders({
-      //     'Content-Type':  'application/json',
-      //     'Authorization': 'Bearer ' + token
-      //   })
-      // };
-      return this.http.get<Emprunt>(this.apiUrl + '/emprunt/' + id);
-    }
+  public getEmpruntById(id: number): Observable<Emprunt> {
+    return this.http.get<Emprunt>(this.apiUrl + '/emprunt/' + id);
+  }
 
-    prolonger(id: number): Observable<Emprunt>{
-      // const httpOptions = {
-      //   headers: new HttpHeaders({
-      //     'Content-Type':  'application/json',
-      //     'Authorization': 'Bearer ' + token
-      //   })
-      // };
-      return this.http.put<any>(this.apiUrl + '/emprunt/prolonger/' + id, null);
-    }
+  public prolonger(id: number): Observable<Emprunt>{
+    return this.http.put<any>(this.apiUrl + '/emprunt/prolonger/' + id, null);
+  }
 
-    rendre(id: number): Observable<Emprunt>{
-      // const httpOptions = {
-      //   headers: new HttpHeaders({
-      //     'Content-Type':  'application/json',
-      //     'Authorization': 'Bearer ' + token
-      //   })
-      // };
-      return this.http.delete<Emprunt>(this.apiUrl + '/emprunt/delete/' + id);
-    }
+  public rendre(id: number): Observable<Emprunt>{
+    return this.http.delete<Emprunt>(this.apiUrl + '/emprunt/delete/' + id);
+  }
 }

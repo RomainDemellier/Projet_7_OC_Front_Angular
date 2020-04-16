@@ -9,16 +9,16 @@ export class AuthorizationService {
 
   constructor() { }
 
-  initializeToken(data: any){
+  public initializeToken(data: any){
     this.token = data.token;
     console.log("Dans intializeToken token : " + this.token);
   }
 
-  getToken(): string {
+  public getToken(): string {
     return this.token;
   }
 
-  resetToken(): void {
+  public resetToken(): void {
     this.token = '';
   }
 }

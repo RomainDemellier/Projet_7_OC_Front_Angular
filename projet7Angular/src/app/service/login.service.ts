@@ -17,20 +17,20 @@ export class LoginService {
     private http: HttpClient
   ) { }
 
-  authenticate(login: Login){
+  public authenticate(login: Login){
     console.log(login.username);
     return this.http.post<Login>(this.loginUrl, login);
   }
 
-  logged(){
+  public logged(){
     this.allReadyLogged = true;
   }
 
-  logout(){
+  public logout(){
     this.allReadyLogged = false;
   }
 
-  isAllReadyLogged(): Boolean {
+  public isAllReadyLogged(): Boolean {
     return this.allReadyLogged;
   }
 }

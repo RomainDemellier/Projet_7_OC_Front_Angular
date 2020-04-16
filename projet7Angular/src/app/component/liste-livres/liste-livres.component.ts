@@ -18,10 +18,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 //import { DataSource } from '@angular/material/table';
 
-// function initializeActionButton(){
-//   var elems = document.querySelectorAll('.fixed-action-btn');
-//   var instances = M.FloatingActionButton.init(elems);
-// }
 
 @Component({
   selector: 'app-livre',
@@ -29,14 +25,14 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./liste-livres.component.scss'],
   providers: [MessageService],
 })
-export class ListeLivresComponent implements OnInit, AfterViewInit {
+export class ListeLivresComponent implements OnInit {
 
-  livres: Livre[];
-  dataSource: MatTableDataSource<Livre>;
-  displayedColumns: string[] = ['titre', 'fullNameAuteur', 'genre', 'nbreExemplaires'];
-  usagerConnecte: Usager;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  public livres: Livre[];
+  public dataSource: MatTableDataSource<Livre>;
+  public displayedColumns: string[] = ['titre', 'fullNameAuteur', 'genre', 'nbreExemplaires'];
+  public usagerConnecte: Usager;
+  @ViewChild(MatSort) public sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) public paginator: MatPaginator;
 
   constructor(
     private livreService: LivreService,
@@ -49,20 +45,12 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
     private dialog: MatDialog
     ) { }
 
-  ngOnInit() {
-    
-    //this.token = this.authorizationService.getToken();
-    
+  ngOnInit(): void {
     this.getLivres();
     this.getUsagerConnecte();
   }
 
-  ngAfterViewInit(){
-    // this.messageService.add({severity:'success', summary:'Bienvenue', detail:''}); 
-    //initializeActionButton();
-  }
-
-  getLivres(): void {
+  private getLivres(): void {
     this.livreService.getLivresDisponibles().subscribe(livres => { 
       this.livres = livres;
       console.log(this.livres);
@@ -71,13 +59,11 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.filterPredicate = function(data, filter: string): boolean {
         return data.titre.toLowerCase().includes(filter) || data.fullNameAuteur.toLowerCase().includes(filter) || data.genre.toLowerCase().includes(filter);
-    };
-      console.log("Coucou");
-    }
-      );
+      };
+    });
   }
 
-  getUsagerConnecte(): void {
+  private getUsagerConnecte(): void {
     this.usagerService.getUsagerConnecte().subscribe((usager) => {
       this.usagerConnecte = usager;
       this.displayedColumns = ['titre', 'fullNameAuteur', 'genre', 'nbreExemplaires', 'actions'];
@@ -91,7 +77,7 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
     });
   }
 
-  emprunter(livre: Livre){
+  public emprunter(livre: Livre): void{
     console.log("Dans emprunter");
     var emprunt: Emprunt = {id:null,livre:null,usager:null,dateEmprunt:null,dateRetour:null,prolonge:null,actif:null};
     emprunt.livre = livre;
@@ -117,12 +103,12 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
     });
   }
 
-  applyFilter(event: Event){
+  public applyFilter(event: Event): void{
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(){
+  public openDialog(): void{
     this.dialogService.openDialogCreationLivre().afterClosed().subscribe((res) => {
       if(res != "exit"){
         if(res) {
@@ -135,7 +121,7 @@ export class ListeLivresComponent implements OnInit, AfterViewInit {
     });
   }
 
-  editerLivre(livre){
+  public editerLivre(livre): void{
     this.dialogService.openDialogEditLivre(livre).afterClosed().subscribe((res) => {
       if(res != "exit"){
         if(res) {

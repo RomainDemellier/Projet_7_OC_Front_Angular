@@ -17,33 +17,33 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LivreEditerModalComponent implements OnInit {
 
-  livreEditionForm: FormGroup;
-  livre: Livre;
-  auteurExiste: Boolean = true;
-  auteurListe: Auteur[];
-  texte: string;
+  public livreEditionForm: FormGroup;
+  public livre: Livre;
+  public auteurExiste: Boolean = true;
+  public auteurListe: Auteur[];
+  public texte: string;
 
-  get titre() {
+  public get titre() {
     return this.livreEditionForm.get('titre');
   }
 
-  get genre() {
+  public get genre() {
     return this.livreEditionForm.get('genre');
   }
 
-  get nbreExemplaires() {
+  public get nbreExemplaires() {
     return this.livreEditionForm.get('nbreExemplaires');
   }
 
-  get auteur() {
+  public get auteur() {
     return this.livreEditionForm.get('auteur');
   }
 
-  get nbreExemplairesAjoutRetrait() {
+  public get nbreExemplairesAjoutRetrait() {
     return this.livreEditionForm.get('nbreExemplairesAjoutRetrait');
   }
 
-  get ajoutOuRetrait() {
+  public get ajoutOuRetrait() {
     return this.livreEditionForm.get('ajoutOuRetrait');
   }
 
@@ -80,7 +80,7 @@ export class LivreEditerModalComponent implements OnInit {
     });
   }
 
-  onChange(){
+  public onChange(): void{
     if(this.ajoutOuRetrait.value === "ajout"){
       this.texte = "Nombre d'exemplaires à ajouter";
     } else {
@@ -88,7 +88,7 @@ export class LivreEditerModalComponent implements OnInit {
     }
   }
 
-  onSubmit(){
+  public onSubmit(): void{
     if(this.ajoutOuRetrait.value === "ajout") {
       this.livre.nbreExemplaires = this.livre.nbreExemplaires + +this.nbreExemplairesAjoutRetrait.value;
       this.livreService.editNbreExemplaires(this.livre).subscribe((livre) => {
@@ -108,7 +108,7 @@ export class LivreEditerModalComponent implements OnInit {
     }
   }
 
-  closeDialog(){
+  public closeDialog(): void{
     this.dialogRef.close("exit");
   }
 }

@@ -13,14 +13,15 @@ export class AuteurService {
 
   constructor(private http: HttpClient) { }
 
-  createAuteur(auteur: Auteur): Observable<Auteur>{
+  public createAuteur(auteur: Auteur): Observable<Auteur>{
     return this.http.post<Auteur>(this.apiUrl + '/create', auteur);
   }
 
-  getAllAuteurs(): Observable<Auteur[]>{
+  public getAllAuteurs(): Observable<Auteur[]>{
     return this.http.get<Auteur[]>(this.apiUrl);
   }
-  getAteurById(id: number): Observable<Auteur>{
+
+  public getAteurById(id: number): Observable<Auteur>{
     console.log(id);
     console.log(typeof id);
     return this.http.get<Auteur>(this.apiUrl + '/' + id);

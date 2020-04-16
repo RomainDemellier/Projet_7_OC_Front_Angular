@@ -5,14 +5,9 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
   templateUrl: './usager.component.html',
   styleUrls: ['./usager.component.scss']
 })
-export class UsagerComponent implements OnInit, AfterViewInit {
+export class UsagerComponent implements OnInit {
 
-  test: Boolean = false;
-  liste;
   constructor() { }
-  ngAfterViewInit(): void {
-    console.log("liste " + this.liste);
-  }
 
   ngOnInit() {
     

@@ -20,10 +20,7 @@ import { Subject } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
 
-  private token: string;
-  usagerConnecte: Usager;
-  changingValue: Subject<Boolean> = new Subject();
-  childRef: ListeLivresComponent;
+  public usagerConnecte: Usager;
 
   constructor(
     private authorizationService: AuthorizationService,
@@ -37,16 +34,11 @@ export class HomeComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    this.token = this.authorizationService.getToken();
-    if (this.token == '') {
-      //this.router.navigate(['/login']);
-    } else {
-      this.getUsagerConnecte();
-    }
+  ngOnInit(): void {
+    this.getUsagerConnecte();
   }
 
-  getUsagerConnecte(): void {
+  private getUsagerConnecte(): void {
     this.usagerService.getUsagerConnecte().subscribe((usager) => {
       this.usagerConnecte = usager;
       console.log("dans Home");
@@ -54,18 +46,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  logout() {
+  public logout(): void {
     this.authorizationService.resetToken();
     this.loginService.logout();
     this.router.navigate(['/login']);
   }
 
-  openDialog() {
-    this.changingValue.next(true);
+  public openDialog(): void {
+    //this.changingValue.next(true);
     this.dialogService.openDialogEditer(this.usagerConnecte)
       .afterClosed().subscribe((res) => {
         console.log(res);
-        //this.messageService.add({severity:'error', summary:'Echec', detail:'Désolé la modificaiton de votre profil n a pu être effectuée'});
         if (res != "exit") {
           if (res) {
             console.log("Edition éffectuée");
@@ -73,7 +64,6 @@ export class HomeComponent implements OnInit {
             //this.logout();
           } else {
             console.log("Edition non effectuée");
-            //this.childRef.showToast("error","Echec","Désolé la modificaiton de votre profil n' a pu être effectuée");
             this.messageService.add({ severity: 'error', summary: 'Echec', detail: 'Désolé la modificaiton de votre profil n a pu être effectuée' });
           }
         }

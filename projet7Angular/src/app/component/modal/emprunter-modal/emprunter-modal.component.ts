@@ -18,7 +18,7 @@ export class EmprunterModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closeDialog(){
+  public closeDialog(): void{
     this.dialogRef.close(false);
   }
 }

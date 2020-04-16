@@ -19,35 +19,35 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LivreCreationModalComponent implements OnInit {
 
-  livreCreationForm: FormGroup;
-  auteurExiste: Boolean = true;
-  auteurListe: Auteur[];
+  public livreCreationForm: FormGroup;
+  public auteurExiste: Boolean = true;
+  public auteurListe: Auteur[];
 
-  get titre() {
+  public get titre() {
     return this.livreCreationForm.get('titre');
   }
 
-  get genre() {
+  public get genre() {
     return this.livreCreationForm.get('genre');
   }
 
-  get nbreExemplaires() {
+  public get nbreExemplaires() {
     return this.livreCreationForm.get('nbreExemplaires');
   }
 
-  get auteur() {
+  public get auteur() {
     return this.livreCreationForm.get('auteur');
   }
 
-  get prenom() {
+  public get prenom() {
     return this.livreCreationForm.get('auteurCreer').get('prenom');
   }
 
-  get nom() {
+  public get nom() {
     return this.livreCreationForm.get('auteurCreer').get('nom');
   }
 
-  get estDansListe() {
+  public get estDansListe() {
     return this.livreCreationForm.get('estDansListe');
   }
 
@@ -98,7 +98,7 @@ export class LivreCreationModalComponent implements OnInit {
     }))
   }
 
-  onChange() {
+  public onChange(): void {
     //console.log(this.estDansListe.value);
     this.auteurExiste = !this.auteurExiste;
     if (!this.auteurExiste) {
@@ -108,7 +108,7 @@ export class LivreCreationModalComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  public onSubmit(): void {
     if (this.auteurExiste) {
       const auteurId = +this.auteur.value;
       console.log(auteurId);
@@ -159,7 +159,7 @@ export class LivreCreationModalComponent implements OnInit {
   }
   
 
-  closeDialog() {
+  public closeDialog(): void {
     this.dialogRef.close("exit");
   }
 }

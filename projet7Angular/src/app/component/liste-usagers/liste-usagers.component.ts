@@ -18,12 +18,12 @@ import { Router } from '@angular/router';
 })
 export class ListeUsagersComponent implements OnInit {
 
-  listeUsagers: Usager[];
-  usagerConnecte: Usager;
-  dataSource: MatTableDataSource<Usager>;
-  displayedColumns: string[] = ['nom', 'email', 'role', 'actions'];
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  public listeUsagers: Usager[];
+  public usagerConnecte: Usager;
+  public dataSource: MatTableDataSource<Usager>;
+  public displayedColumns: string[] = ['nom', 'email', 'role', 'actions'];
+  @ViewChild(MatSort) public sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) public paginator: MatPaginator;
 
   constructor(
     private usagerService: UsagerService,
@@ -37,7 +37,7 @@ export class ListeUsagersComponent implements OnInit {
     this.getAllUsagers();
   }
 
-  getUsagerConnecte(): void {
+  private getUsagerConnecte(): void {
     this.usagerService.getUsagerConnecte().subscribe((usager) => {
       this.usagerConnecte = usager;
       if(this.usagerConnecte.role != 'ADMIN'){
@@ -48,7 +48,7 @@ export class ListeUsagersComponent implements OnInit {
     });
   }
 
-  getAllUsagers(){
+  private getAllUsagers(): void{
     this.usagerService.getAllUsagers().subscribe((usagers) => {
       this.listeUsagers = usagers;
       this.dataSource = new MatTableDataSource(usagers);
@@ -61,7 +61,7 @@ export class ListeUsagersComponent implements OnInit {
     })
   }
 
-  openDialog(usager: Usager){
+  public openDialog(usager: Usager): void{
     this.dialogService.openDialogEditerRole(usager)
     .afterClosed().subscribe((res) => {
       if(res){
@@ -70,7 +70,7 @@ export class ListeUsagersComponent implements OnInit {
     });
   }
 
-  openDialogCreateAdmin(){
+  public openDialogCreateAdmin(): void{
     this.dialogService.openDialogCreateAdmin().afterClosed()
     .subscribe((res) => {
       if(res != "exit"){
@@ -84,7 +84,7 @@ export class ListeUsagersComponent implements OnInit {
     })
   }
 
-  applyFilter(event: Event){
+  public applyFilter(event: Event): void{
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

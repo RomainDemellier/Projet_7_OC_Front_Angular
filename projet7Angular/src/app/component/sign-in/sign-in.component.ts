@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./sign-in.component.scss'],
   providers: [MessageService]
 })
-export class SignInComponent implements OnInit, AfterViewInit {
+export class SignInComponent implements OnInit {
 
   private login: Login;
 
@@ -30,15 +30,11 @@ export class SignInComponent implements OnInit, AfterViewInit {
     password: ['', Validators.required]
   })
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loginService.logout();
   }
 
-  ngAfterViewInit(){
-    //this.messageService.add({severity:'error', summary:'Echec', detail:'Désolé ça n\'a pas fonctionné.'}); 
-  }
-
-  onSubmit(){
+  public onSubmit(): void{
     this.loginService.authenticate(this.loginForm.value).subscribe((data:any) => {
       console.log("Succès ");
       this.authorizationService.initializeToken(data);

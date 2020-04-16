@@ -18,12 +18,12 @@ import { EMPTY } from 'rxjs';
 })
 export class ListeEmpruntsComponent implements OnInit {
 
-  usagerConnecte: Usager;
-  emprunts: Emprunt[];
-  dataSource: MatTableDataSource<Emprunt>;
-  displayedColumns: string[] = ['emprunteur', 'titre', 'dateEmprunt', 'dateRetour', 'actif'];
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  public usagerConnecte: Usager;
+  public emprunts: Emprunt[];
+  public dataSource: MatTableDataSource<Emprunt>;
+  public displayedColumns: string[] = ['emprunteur', 'titre', 'dateEmprunt', 'dateRetour', 'actif'];
+  @ViewChild(MatSort) public sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) public paginator: MatPaginator;
 
   constructor(
     private usagerService: UsagerService,
@@ -36,7 +36,7 @@ export class ListeEmpruntsComponent implements OnInit {
     this.getAllEmprunts();
   }
 
-  getUsagerConnecte(){
+  private getUsagerConnecte(): void{
     console.log("Dans usagerConnecte")
     this.usagerService.getUsagerConnecte().subscribe((usager) => {
 
@@ -50,7 +50,7 @@ export class ListeEmpruntsComponent implements OnInit {
     });
   }
 
-  getAllEmprunts(){
+  private getAllEmprunts(): void{
     this.empruntService.getAllEmprunts().subscribe((emprunts) => {
       this.emprunts = emprunts;
       this.dataSource = new MatTableDataSource(emprunts);
@@ -61,10 +61,10 @@ export class ListeEmpruntsComponent implements OnInit {
          || data.livre.titre.toLowerCase().includes(filter) || formatDate(data.dateEmprunt, "dd/MM/yyyy", 'en_US').toLowerCase().includes(filter)
          || formatDate(data.dateRetour, "dd/MM/yyyy", 'en_US').toLowerCase().includes(filter);
     };
-    });
+  });
   }
 
-  applyFilter(event: Event){
+  public applyFilter(event: Event): void{
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

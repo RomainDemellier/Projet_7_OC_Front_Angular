@@ -20,7 +20,7 @@ export class DialogEmpruntModalService {
     private dialog: MatDialog
   ) { }
 
-  openDialog(prenom: string, titre: string){
+  public openDialog(prenom: string, titre: string){
     return this.dialog.open(EmprunterModalComponent, {
       width: '450px',
       disableClose: true,
@@ -29,7 +29,7 @@ export class DialogEmpruntModalService {
     });
   }
 
-  openDialogEditer(usager: Usager){
+  public openDialogEditer(usager: Usager){
     return this.dialog.open(EditerUsagerComponent, {
       width: '550px',
       disableClose: true,
@@ -37,7 +37,7 @@ export class DialogEmpruntModalService {
     });
   }
 
-  openDialogEditerRole(usager: Usager){
+  public openDialogEditerRole(usager: Usager){
     return this.dialog.open(EditerRoleUsagerComponent, {
       width: '450px',
       disableClose: true,
@@ -45,7 +45,7 @@ export class DialogEmpruntModalService {
     });
   }
 
-  openDialogEmpruntDetail(emprunt: Emprunt){
+  public openDialogEmpruntDetail(emprunt: Emprunt){
     console.log("Dans emprunt detail modal");
     return this.dialog.open(EmpruntDetailModalComponent, {
       width: '400px',
@@ -55,7 +55,7 @@ export class DialogEmpruntModalService {
     });
   }
 
-  openDialogCreationLivre(){
+  public openDialogCreationLivre(){
     return this.dialog.open(LivreCreationModalComponent, {
       width: '550px',
       disableClose: true,
@@ -63,7 +63,7 @@ export class DialogEmpruntModalService {
     });
   }
 
-  openDialogEditLivre(livre){
+  public openDialogEditLivre(livre){
     return this.dialog.open(LivreEditerModalComponent, {
       width: '550px',
       disableClose: true,
@@ -72,7 +72,7 @@ export class DialogEmpruntModalService {
     });
   }
 
-  openDialogCreateAdmin(){
+  public openDialogCreateAdmin(){
     return this.dialog.open(CreateAdminModalComponent, {
       width: '550px',
       disableClose: true,

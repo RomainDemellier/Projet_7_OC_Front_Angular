@@ -25,12 +25,12 @@ import { EmpruntComponent } from './component/emprunt/emprunt.component';
 import { from } from 'rxjs';
 // import { EmpruntDetailsComponent } from './component/emprunt-details/emprunt-details.component';
 import { TokenInterceptorService } from './service/token-interceptor.service';
-import { LivreCreationComponent } from './component/livre-creation/livre-creation.component';
+//import { LivreCreationComponent } from './component/livre-creation/livre-creation.component';
 import { EmprunterModalComponent } from './component/modal/emprunter-modal/emprunter-modal.component';
 import { ListeUsagersComponent } from './component/liste-usagers/liste-usagers.component';
-import { UsagerEditerRoleComponent } from './component/usager-editer-role/usager-editer-role.component';
+//import { UsagerEditerRoleComponent } from './component/usager-editer-role/usager-editer-role.component';
 import { EditerUsagerComponent } from './component/modal/editer-usager/editer-usager.component';
-import { EmpruntDetailsComponent } from './component/emprunt-details/emprunt-details.component';
+//import { EmpruntDetailsComponent } from './component/emprunt-details/emprunt-details.component';
 import { EditerRoleUsagerComponent } from './component/modal/editer-role-usager/editer-role-usager.component';
 import { EmpruntDetailModalComponent } from './component/modal/emprunt-detail-modal/emprunt-detail-modal.component';
 import { LivreCreationModalComponent } from './component/modal/livre-creation-modal/livre-creation-modal.component';
@@ -47,11 +47,11 @@ import { ListeEmpruntsComponent } from './component/liste-emprunts/liste-emprunt
     SignUpComponent,
     ListeLivresComponent,
     EmpruntComponent,
-    EmpruntDetailsComponent,
-    LivreCreationComponent,
+    //EmpruntDetailsComponent,
+    //LivreCreationComponent,
     EmprunterModalComponent,
     ListeUsagersComponent,
-    UsagerEditerRoleComponent,
+    //UsagerEditerRoleComponent,
     EditerUsagerComponent,
     EditerRoleUsagerComponent,
     EmpruntDetailModalComponent,
@@ -82,6 +82,6 @@ import { ListeEmpruntsComponent } from './component/liste-emprunts/liste-emprunt
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents: [EmprunterModalComponent, EditerUsagerComponent,EmpruntDetailsComponent,EditerUsagerComponent]
+  entryComponents: [EmprunterModalComponent, EditerUsagerComponent,EmpruntDetailModalComponent,EditerUsagerComponent]
 })
 export class AppModule { }

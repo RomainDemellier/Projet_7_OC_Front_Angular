@@ -13,18 +13,18 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class EditerUsagerComponent implements OnInit {
 
-  editerUsagerForm: FormGroup;
-  formActivation: Boolean = false;
+  public editerUsagerForm: FormGroup;
+  public formActivation: Boolean = false;
 
-  get nom(){
+  public get nom(){
     return this.editerUsagerForm.get('nom');
   }
 
-  get prenom(){
+  public get prenom(){
     return this.editerUsagerForm.get('prenom');
   }
 
-  get email(){
+  public get email(){
     return this.editerUsagerForm.get('email');
   }
 
@@ -48,14 +48,14 @@ export class EditerUsagerComponent implements OnInit {
     this.email.disable();
   }
 
-  activate(){
+  public activate(): void{
     this.prenom.enable();
     this.nom.enable();
     this.email.enable();
     this.formActivation = true;
   }
 
-  onSubmit(){
+  public onSubmit(): void{
     this.usagerService.editProfil(this.editerUsagerForm.value).subscribe((usager) => {
       console.log(usager);
       this.dialogRef.close(true);
@@ -65,7 +65,7 @@ export class EditerUsagerComponent implements OnInit {
     });
   }
 
-  closeDialog(){
+  public closeDialog(): void{
     this.dialogRef.close("exit");
   }
 

@@ -11,22 +11,22 @@ import { UsagerService } from 'src/app/service/usager.service';
 })
 export class EditerRoleUsagerComponent implements OnInit {
 
-  usager: Usager;
-  editerRoleForm: FormGroup;
+  public usager: Usager;
+  public editerRoleForm: FormGroup;
 
-  get nom(){
+  public get nom(){
     return this.editerRoleForm.get('nom');
   }
 
-  get prenom(){
+  public get prenom(){
     return this.editerRoleForm.get('prenom');
   }
 
-  get email(){
+  public get email(){
     return this.editerRoleForm.get('email');
   }
 
-  get id(){
+  public get id(){
     return this.editerRoleForm.get('id');
   }
 
@@ -51,14 +51,14 @@ export class EditerRoleUsagerComponent implements OnInit {
     this.email.disable();
   }
 
-  onSubmit(){
+  public onSubmit(): void{
     console.log(this.editerRoleForm.value);
     this.usagerService.editRole(this.editerRoleForm.value).subscribe((usager) => {
       this.dialogRef.close(true);
     });
   }
 
-  closeDialog(){
+  public closeDialog(): void{
     this.dialogRef.close("exit");
   }
 }

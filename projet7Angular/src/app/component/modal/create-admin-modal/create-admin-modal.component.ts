@@ -14,25 +14,25 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CreateAdminModalComponent implements OnInit {
 
-  registrationForm: FormGroup;
+  public registrationForm: FormGroup;
 
-  get nom(){
+  public get nom(){
     return this.registrationForm.get('nom');
   }
 
-  get prenom(){
+  public get prenom(){
     return this.registrationForm.get('prenom');
   }
 
-  get email(){
+  public get email(){
     return this.registrationForm.get('email');
   }
 
-  get password(){
+  public get password(){
     return this.registrationForm.get('password');
   }
 
-  get confirmPassword(){
+  public get confirmPassword(){
     return this.registrationForm.get('confirmPassword');
   }
 
@@ -56,9 +56,9 @@ export class CreateAdminModalComponent implements OnInit {
 
 
 
-  onSubmit(){
+  public onSubmit(): void{
     this.usagerService.createAdmin(this.registrationForm.value).subscribe(() => {
-      console.log("Succès");
+      console.log("Succès")
       //this.router.navigate([('/login')]);
       this.dialogRef.close(true);
 
@@ -68,7 +68,7 @@ export class CreateAdminModalComponent implements OnInit {
     });
   }
 
-  closeDialog(){
+  public closeDialog(): void{
     this.dialogRef.close("exit");
   }
 

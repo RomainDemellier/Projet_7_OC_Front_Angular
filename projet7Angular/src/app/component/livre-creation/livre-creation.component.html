@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col s6 offset-s3">
       <div class="container">
@@ -15,14 +15,11 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s5">
-
-                    <!-- <div *ngIf="auteurExiste"> -->
                       <select formControlName="auteur" style="display: block;" *ngIf="auteurListe">
                         <option value="">Liste d'auteurs</option>
                         <option  *ngFor="let aut of auteurListe" [value]="aut.id">{{ aut.prenom + ' ' + aut.nom }}</option>
                       </select>
                       <small class="red-text" *ngIf="auteur.errors?.required && auteur.touched">Ce champ est requis</small>
-                    <!-- </div> -->
                   </div>
                   <div class="input-field col s7">
                     <p>
@@ -80,4 +77,4 @@
     </div>
             
   </div>
-</div>
+</div> -->

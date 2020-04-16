@@ -19,36 +19,31 @@ export class UsagerService {
     private authorizeService: AuthorizationService
   ) { }
 
-  createUsager(usager: UsagerRegistration): Observable<any> {
+  public createUsager(usager: UsagerRegistration): Observable<any> {
     return this.http.post<UsagerRegistration>(this.apiUrl + '/create',usager);
   }
 
-  createAdmin(admin: UsagerRegistration): Observable<any> {
+  public createAdmin(admin: UsagerRegistration): Observable<any> {
     return this.http.post<UsagerRegistration>(this.apiUrl + '/createAdmin',admin);
   }
 
-  getById(id: number): Observable<Usager>{
+  public getById(id: number): Observable<Usager>{
     return this.http.get<Usager>(this.apiUrl + '/' + id);
   }
 
-  getUsagerConnecte(): Observable<Usager> {
-    // if(this.authorizeService.getToken() === ''){
-    //   return EMPTY;
-    // } else {
-    //   return this.http.get<Usager>(this.apiUrl + '/connecte');
-    // } 
+  public getUsagerConnecte(): Observable<Usager> {
     return this.http.get<Usager>(this.apiUrl + '/connecte');
   }
 
-  getAllUsagers(): Observable<Usager[]>{
+  public getAllUsagers(): Observable<Usager[]>{
     return this.http.get<Usager[]>(this.apiUrl);
   }
 
-  editRole(usager: Usager): Observable<Usager>{
+  public editRole(usager: Usager): Observable<Usager>{
     return this.http.put<Usager>(this.apiUrl + '/update/role', usager);
   }
 
-  editProfil(usager: Usager): Observable<Usager> {
+  public editProfil(usager: Usager): Observable<Usager> {
     return this.http.put<Usager>(this.apiUrl + '/update/profil', usager);
   }
 }

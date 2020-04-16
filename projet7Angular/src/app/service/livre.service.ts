@@ -14,21 +14,15 @@ export class LivreService {
 
   constructor(private http: HttpClient) { }
 
-  getLivresDisponibles(): Observable<Livre[]>{
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json',
-    //     'Authorization': 'Bearer ' + bearer
-    //   })
-    // };
+  public getLivresDisponibles(): Observable<Livre[]>{
     return this.http.get<Livre[]>(this.apiUrl);
   }
 
-  createLivre(livre: Livre): Observable<Livre> {
+  public createLivre(livre: Livre): Observable<Livre> {
     return this.http.post<Livre>(this.apiUrl + '/create', livre);
   }
 
-  editNbreExemplaires(livre: Livre): Observable<Livre> {
+  public editNbreExemplaires(livre: Livre): Observable<Livre> {
     return this.http.put<Livre>(this.apiUrl + '/editNbreExemplaires', livre);
   }
 }

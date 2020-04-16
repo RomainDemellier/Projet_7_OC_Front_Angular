@@ -19,13 +19,12 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class EmpruntComponent implements OnInit {
 
-  emprunts: Emprunt[];
-  token: string;
-  usagerConnecte: Usager;
-  dataSource: MatTableDataSource<Emprunt>;
-  displayedColumns: string[] = ['titre', 'dateEmprunt', 'dateRetour', 'actions'];
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  public emprunts: Emprunt[];
+  public usagerConnecte: Usager;
+  public dataSource: MatTableDataSource<Emprunt>;
+  public displayedColumns: string[] = ['titre', 'dateEmprunt', 'dateRetour', 'actions'];
+  @ViewChild(MatSort) public sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) public paginator: MatPaginator;
 
   constructor(
     private empruntService: EmpruntService,
@@ -35,13 +34,13 @@ export class EmpruntComponent implements OnInit {
     private dialogService: DialogEmpruntModalService
   ) { }
 
-  ngOnInit() {
-    this.token = this.authorizationService.getToken();
+  ngOnInit(): void {
+    // this.token = this.authorizationService.getToken();
     this.getUsagerConnecte();
     this.getEmpruntsUsagerConnecte();
   }
 
-  getUsagerConnecte(): void {
+  private getUsagerConnecte(): void {
     this.usagerService.getUsagerConnecte().subscribe((usager) => {
       this.usagerConnecte = usager;
       console.log("usagerConnecte");
@@ -49,8 +48,8 @@ export class EmpruntComponent implements OnInit {
     });
   }
 
-  getEmpruntsUsagerConnecte(){
-    this.empruntService.getEmpruntsUsagerConnecte(this.token).subscribe((emprunts) => {
+  private getEmpruntsUsagerConnecte(): void{
+    this.empruntService.getEmpruntsUsagerConnecte().subscribe((emprunts) => {
       this.emprunts = emprunts;
       this.dataSource = new MatTableDataSource(emprunts);
       this.dataSource.paginator = this.paginator;
@@ -62,7 +61,7 @@ export class EmpruntComponent implements OnInit {
     });
   }
 
-  openDialog(emprunt: Emprunt){
+  public openDialog(emprunt: Emprunt): void{
     this.dialogService.openDialogEmpruntDetail(emprunt)
     .afterClosed().subscribe((res) =>  {
       console.log(res);
@@ -81,7 +80,7 @@ export class EmpruntComponent implements OnInit {
     })
   }
 
-  applyFilter(event: Event){
+  public applyFilter(event: Event): void{
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
