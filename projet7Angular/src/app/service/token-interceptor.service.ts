@@ -14,10 +14,6 @@ export class TokenInterceptorService implements HttpInterceptor {
     private authorizationService: AuthorizationService
   ) { }
 
-  // ngOnInit(){
-  //   this.token = this.authorizationService.getToken();
-  // }
-
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
     this.token = this.authorizationService.getToken();
     req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });

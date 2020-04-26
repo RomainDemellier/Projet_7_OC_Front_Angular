@@ -9,7 +9,6 @@ import { environment, apiUrl } from 'src/environments/environment';
 })
 export class LivreService {
 
-  // private apiUrl = 'http://localhost:8080/api/livre';
   private apiUrl = apiUrl + '/api/livre';
 
   constructor(private http: HttpClient) { }

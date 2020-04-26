@@ -9,7 +9,6 @@ import { environment, apiUrl } from 'src/environments/environment';
 })
 export class LoginService {
 
-  // private loginUrl = 'http://localhost:8080/authenticate';
   private loginUrl = apiUrl + '/authenticate';
   private allReadyLogged: Boolean = false;
 

@@ -3,13 +3,7 @@
 <div mat-dialog-content class="center-align">
   <p>Voulez-vous emprunter {{ data.titre | uppercase }}?</p>
 </div>
-<!-- <div mat-dialog-actions>
-  <button mat-flat-button [mat-dialog-close]="false">Non merci</button>
-  <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial>Oui</button>
-</div> -->
   <div class="row" style="margin-top: 15px;">
-    <!-- <button class="col s4 offset-s1" mat-flat-button id="yes-button" [mat-dialog-close]="true" cdkFocusInitial>Oui</button>
-    <button class="col s4 offset-s1 red lighten-2" mat-flat-button id="no-button" [mat-dialog-close]="false">Non merci</button> -->
     <a class="btn col s4 offset-s1 empruntActionYes" id="yes-button" [mat-dialog-close]="true" cdkFocusInitial>Oui</a>
     <a class="btn col s4 offset-s1 empruntActionNo" id="no-button" [mat-dialog-close]="false">Non merci</a>
   </div>

@@ -16,7 +16,6 @@ import { environment } from 'src/environments/environment';
 })
 export class SignUpComponent implements OnInit {
 
-  // private usager: Usager = new Usager() ;
   public get nom(){
     return this.registrationForm.get('nom');
   }

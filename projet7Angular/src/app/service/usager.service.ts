@@ -11,7 +11,6 @@ import { AuthorizationService } from './authorization.service';
 })
 export class UsagerService {
 
-  // private apiUrl = 'http://localhost:8080/api/usager';
   private apiUrl = apiUrl + '/api/usager';
 
   constructor(

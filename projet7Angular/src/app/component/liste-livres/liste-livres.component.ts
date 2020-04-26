@@ -16,8 +16,6 @@ import { DialogEmpruntModalService } from 'src/app/service/dialog-emprunt-modal.
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-//import { DataSource } from '@angular/material/table';
-
 
 @Component({
   selector: 'app-livre',

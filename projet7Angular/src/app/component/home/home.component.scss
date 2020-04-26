@@ -12,10 +12,6 @@ $divider-color:        #BDBDBD;
     
 }
 
-// .text-color {
-//     color: $accent-color;
-// }
-
 .nav-extended a {
     color: $primary-color-text;
 }
@@ -27,6 +23,5 @@ a:hover, li:hover {
 
 .activeRoute {
     color: $accent-color !important;
-    //font-weight: bold;
     background-color: $primary-color !important;
 }

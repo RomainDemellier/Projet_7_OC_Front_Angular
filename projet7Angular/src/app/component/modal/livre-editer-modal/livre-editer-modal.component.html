@@ -12,10 +12,10 @@
             </div>
             <div class="row" style="padding-left: 12px; padding-right: 12px;">
                 <div class="input-field col s12">
-                     <input type="text" formControlName="auteur" id="auteur">
-                    <label for="auteur" class="active">Auteur</label> 
+                    <input type="text" formControlName="auteur" id="auteur">
+                    <label for="auteur" class="active">Auteur</label>
                     <small class="red-text" *ngIf="titre.errors?.required && titre.touched">Ce champ est
-                        requis</small> 
+                        requis</small>
                 </div>
             </div>
             <div class="input-field col s12">
@@ -36,25 +36,27 @@
                     rentrez que des chiffres</small>
             </div>
             <div class="row">
-                
-                    <p class="col s5">
-                        <label>
-                          <input class="with-gap" formControlName="ajoutOuRetrait" name="ajoutOuRetrait" type="radio" checked value="ajout" (change)="onChange()"/>
-                          <span>Ajouter des exemplaires</span>
-                        </label>
-                      </p>
-                      <p class="col s5">
-                        <label>
-                          <input class="with-gap" formControlName="ajoutOuRetrait" name="ajoutOuRetrait" type="radio" value="retrait" (change)="onChange()"/>
-                          <span>Retirer des exemplaires</span>
-                        </label>
-                      </p>
-                
+
+                <p class="col s5">
+                    <label>
+                        <input class="with-gap" formControlName="ajoutOuRetrait" name="ajoutOuRetrait" type="radio"
+                            checked value="ajout" (change)="onChange()" />
+                        <span>Ajouter des exemplaires</span>
+                    </label>
+                </p>
+                <p class="col s5">
+                    <label>
+                        <input class="with-gap" formControlName="ajoutOuRetrait" name="ajoutOuRetrait" type="radio"
+                            value="retrait" (change)="onChange()" />
+                        <span>Retirer des exemplaires</span>
+                    </label>
+                </p>
+
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input type="text" formControlName="nbreExemplairesAjoutRetrait" id="nbreExemplairesAjoutRetrait" placeholder="{{ texte }}">
-                    <!-- <label for="nbreExemplairesAjoutRetrait">Nombre d'exemplaires à ajouter</label> -->
+                    <input type="text" formControlName="nbreExemplairesAjoutRetrait" id="nbreExemplairesAjoutRetrait"
+                        placeholder="{{ texte }}">
                     <small class="red-text" *ngIf="nbreExemplaires.errors?.required && nbreExemplaires.touched">Ce
                         champ est requis</small>
                     <small class="red-text"

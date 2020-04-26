@@ -10,8 +10,6 @@
             </div>
             <div class="row">
                 <div class="input-field col s5">
-
-                    <!-- <div *ngIf="auteurExiste"> -->
                     <select formControlName="auteur" style="display: block;" *ngIf="auteurListe">
                         <option value="">Liste d'auteurs</option>
                         <option *ngFor="let aut of auteurListe" [value]="aut.id">
@@ -19,7 +17,6 @@
                     </select>
                     <small class="red-text" *ngIf="auteur.errors?.required && auteur.touched">Ce champ est
                         requis</small>
-                    <!-- </div> -->
                 </div>
                 <div class="input-field col s7">
                     <p>

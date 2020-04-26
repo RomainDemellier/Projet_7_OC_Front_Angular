@@ -1,46 +1,37 @@
-<!-- <div class="mat-elevation-z8"> -->
-    <h1 class="title1">Tous les Emprunts</h1>
-    <div class="row filter">
-      <mat-form-field class="searchFormField col s12">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="La reine Margot">
-      </mat-form-field>
-    </div>
-    <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">   
-      <ng-container matColumnDef="emprunteur">
-        <mat-header-cell *matHeaderCellDef>Emprunteur</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.usager.prenom + ' ' + element.usager.nom}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="titre">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Titre du livre</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.livre.titre}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="dateEmprunt">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Date d'emprunt</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.dateEmprunt | date : "dd/MM/yyyy"}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="dateRetour">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Date retour</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.dateRetour | date : "dd/MM/yyyy"}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="actif">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Actif</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <span *ngIf="element.actif">Oui</span>
-          <span *ngIf="!element.actif">Non</span>
-        </mat-cell>
-      </ng-container>
-      <!-- <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let element">
-         <button *ngIf="usagerConnecte" [disabled]="element.nbreExemplaires <= 0 " (click)="emprunter(element)" class="btn-floating btn-small action" title="Empunter {{element.titre}}" style="margin-right: 20px;"><i class="material-icons">book</i></button>
-          <button  class="btn-floating btn-small action" title="Modifier {{element.titre}}" (click)="editerLivre(element)"><i class="material-icons">create</i></button>
-        </mat-cell>
-      </ng-container> -->
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-    <mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" [length]="30"></mat-paginator>
-  <!-- </div> -->
-  
-  <p-toast></p-toast>
+<h1 class="title1">Tous les Emprunts</h1>
+<div class="row filter">
+  <mat-form-field class="searchFormField col s12">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="La reine Margot">
+  </mat-form-field>
+</div>
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <ng-container matColumnDef="emprunteur">
+    <mat-header-cell *matHeaderCellDef>Emprunteur</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.usager.prenom + ' ' + element.usager.nom}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="titre">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Titre du livre</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.livre.titre}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="dateEmprunt">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Date d'emprunt</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.dateEmprunt | date : "dd/MM/yyyy"}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="dateRetour">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Date retour</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.dateRetour | date : "dd/MM/yyyy"}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="actif">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Actif</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <span *ngIf="element.actif">Oui</span>
+      <span *ngIf="!element.actif">Non</span>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" [length]="30"></mat-paginator>
+
+<p-toast></p-toast>

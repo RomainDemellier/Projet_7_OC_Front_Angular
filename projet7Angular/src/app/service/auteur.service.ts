@@ -8,7 +8,6 @@ import { environment, apiUrl } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuteurService {
-  // private apiUrl: string = 'http://localhost:8080/api/auteur';
   private apiUrl: string = apiUrl + '/api/auteur';
 
   constructor(private http: HttpClient) { }

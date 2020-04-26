@@ -9,7 +9,6 @@ import { DialogEmpruntModalService } from 'src/app/service/dialog-emprunt-modal.
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-// import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-emprunt',
@@ -35,7 +34,6 @@ export class EmpruntComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.token = this.authorizationService.getToken();
     this.getUsagerConnecte();
     this.getEmpruntsUsagerConnecte();
   }
@@ -65,7 +63,6 @@ export class EmpruntComponent implements OnInit {
     this.dialogService.openDialogEmpruntDetail(emprunt)
     .afterClosed().subscribe((res) =>  {
       console.log(res);
-      //this.messageService.add({severity: 'warn', summary: 'Pas de prolongement', detail: 'Votre Emprunt du livre ' + emprunt.livre.titre + ' a déjà été prolongé de 4 semaines.'});
       if(res === "prolongationOk"){
         this.getEmpruntsUsagerConnecte();
         this.messageService.add({severity: 'info', summary: 'Prolongement', detail: 'Votre Emprunt du livre ' + emprunt.livre.titre.toUpperCase() + ' est prolongé de 4 semaines.'});

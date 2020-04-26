@@ -9,7 +9,6 @@ import { environment, apiUrl } from 'src/environments/environment';
 })
 export class EmpruntService {
 
-  // private apiUrl: string = 'http://localhost:8080/api';
   private apiUrl: string = apiUrl + '/api';
 
   constructor(

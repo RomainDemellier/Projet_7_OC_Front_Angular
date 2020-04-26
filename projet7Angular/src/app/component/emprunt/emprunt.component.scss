@@ -42,14 +42,7 @@ $divider-color:        #BDBDBD;
     border: 1px solid black;
   }
 
-  .searchFormField{
-    // display: inline-block !important;
-    // width: 92%;
-  }
-
   .creer {
-    // margin-bottom: 20px;
-    // margin-left: 30px;
     margin-top: 10px;
     background-color: $primary-color;
   }
@@ -78,20 +71,3 @@ $divider-color:        #BDBDBD;
 .details:hover {
   background-color: $primary-color-dark;
 }
-
-// .action {
-//   //background-color: $primary-color;
-//   background-color: $primary-color-text;
-// }
-
-// .action i {
-//   color: $primary-text-color;
-// }
-
-// .action:hover {
-//   background-color: $primary-text-color;
-// }
-
-// .action:hover i{
-//   color: $primary-color-text;
-// }

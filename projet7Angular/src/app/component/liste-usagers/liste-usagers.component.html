@@ -1,75 +1,37 @@
-<!-- <div class="">
-    <h1 class="center-align">Liste des usagers</h1>
-  <div class="container">
-    <div class="row">
-      <div class="col s12">
-        <table class="striped centered bordered" *ngIf="listeUsagers">
-          <thead>
-            <tr>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th></th>
-            </tr>
-          </thead>
-    
-          <tbody>
-            <tr *ngFor="let usager of listeUsagers">
-              <td><strong>{{ usager.prenom }}</strong></td>
-              <td><strong>{{ usager.nom }}</strong></td>
-              <td>{{ usager.email }}</td>
-              <td>{{ usager.role }}</td>
-              <td><a (click)="openDialog(usager)" class="btn-floating btn-small blue" title="Editer le role de {{usager.prenom}}"><i class="material-icons">create</i></a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+<h1 class="title1">Les Usagers</h1>
+<div class="row filter">
+  <mat-form-field class="searchFormField col s11">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Romain">
+  </mat-form-field>
+  <div class="col s1" *ngIf="usagerConnecte && usagerConnecte.role == 'ADMIN'">
+    <a class="btn-floating creer action" title="Créer un administrateur" (click)="openDialogCreateAdmin()"><i
+        class="material-icons">add</i></a>
   </div>
-  </div>
-  <p-toast></p-toast> -->
+</div>
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <ng-container matColumnDef="nom">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
+    <mat-cell *matCellDef="let element"><strong>{{element.prenom}} &nbsp;&nbsp; {{element.nom}}</strong></mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="role">
+    <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+    <mat-cell *matCellDef="let element"><strong>{{element.role}}</strong></mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef class="actions"></mat-header-cell>
+    <mat-cell *matCellDef="let element" class="actions">
+      <a (click)="openDialog(element)" class="btn-floating btn-small action"
+        title="Modifier le rôle de {{element.prenom + ' ' + element.nom}}"><i class="material-icons">create</i></a>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" [length]="30"></mat-paginator>
 
-  <!-- <div class="mat-elevation-z8"> -->
-    <h1 class="title1">Les Usagers</h1>
-    <div class="row filter">
-      <mat-form-field class="searchFormField col s11">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Romain">
-      </mat-form-field>
-      <div class="col s1" *ngIf="usagerConnecte && usagerConnecte.role == 'ADMIN'">
-        <a class="btn-floating creer action" title="Créer un administrateur" (click)="openDialogCreateAdmin()"><i class="material-icons">add</i></a>
-      </div>
-    </div>
-    <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">   
-      <ng-container matColumnDef="nom">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Nom</mat-header-cell>
-        <mat-cell *matCellDef="let element"><strong>{{element.prenom}} &nbsp;&nbsp; {{element.nom}}</strong></mat-cell>
-      </ng-container>
-      <!-- <ng-container matColumnDef="prenom">
-        <mat-header-cell *matHeaderCellDef>Prénom</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.prenom}}</mat-cell>
-      </ng-container> -->
-      <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="role">
-        <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
-        <mat-cell *matCellDef="let element"><strong>{{element.role}}</strong></mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="actions" >
-        <mat-header-cell *matHeaderCellDef class="actions"></mat-header-cell>
-        <mat-cell *matCellDef="let element" class="actions">
-          <!-- <a class="btn-floating btn-small modifier" title="Empunter {{element.titre}}" style="margin-right: 20px;"><i class="material-icons">book</i></a> -->
-          <a (click)="openDialog(element)" class="btn-floating btn-small action" title="Modifier le rôle de {{element.prenom + ' ' + element.nom}}" ><i class="material-icons">create</i></a>
-        </mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-    <mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" [length]="30"></mat-paginator>
-  <!-- </div> -->
-  
-  <p-toast></p-toast>
-  
+<p-toast></p-toast>

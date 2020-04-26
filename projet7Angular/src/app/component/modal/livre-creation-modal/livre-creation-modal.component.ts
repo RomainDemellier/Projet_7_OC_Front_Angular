@@ -57,7 +57,6 @@ export class LivreCreationModalComponent implements OnInit {
     private auteurService: AuteurService,
     private livreService: LivreService,
     public dialogRef: MatDialogRef<LivreCreationModalComponent>
-    //private messageService: MessageService,
   ) {
   }
 
@@ -99,7 +98,6 @@ export class LivreCreationModalComponent implements OnInit {
   }
 
   public onChange(): void {
-    //console.log(this.estDansListe.value);
     this.auteurExiste = !this.auteurExiste;
     if (!this.auteurExiste) {
       this.auteur.disable();

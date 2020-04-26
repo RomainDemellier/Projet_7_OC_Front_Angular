@@ -27,7 +27,6 @@ export class EmpruntDetailModalComponent implements OnInit {
       this.dialogRef.close("prolongationPasOk");
     } else {
       this.empruntService.prolonger(this.emprunt.id).subscribe((emprunt) => {
-        //this.router.navigate(['/home/emprunts']);
         this.dialogRef.close("prolongationOk");
       });
     }

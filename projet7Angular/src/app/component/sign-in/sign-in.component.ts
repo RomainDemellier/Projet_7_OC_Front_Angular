@@ -38,7 +38,6 @@ export class SignInComponent implements OnInit {
     this.loginService.authenticate(this.loginForm.value).subscribe((data:any) => {
       console.log("Succès ");
       this.authorizationService.initializeToken(data);
-      // this.messageService.add({severity:'success', summary:'Succès', detail:'Bravo vous êtes logué !'});
       this.router.navigate(['/home']);
     },
     (err: HttpErrorResponse) => { 
