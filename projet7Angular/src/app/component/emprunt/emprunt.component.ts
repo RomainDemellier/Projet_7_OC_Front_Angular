@@ -53,7 +53,7 @@ export class EmpruntComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.dataSource.filterPredicate = function(data, filter: string): boolean {
-        return data.livre.titre.toLowerCase().includes(filter);
+        return data.exemplaire.livre.titre.toLowerCase().includes(filter);
     };
       console.log("Succès");
     });
@@ -65,14 +65,14 @@ export class EmpruntComponent implements OnInit {
       console.log(res);
       if(res === "prolongationOk"){
         this.getEmpruntsUsagerConnecte();
-        this.messageService.add({severity: 'info', summary: 'Prolongement', detail: 'Votre Emprunt du livre ' + emprunt.livre.titre.toUpperCase() + ' est prolongé de 4 semaines.'});
+        this.messageService.add({severity: 'info', summary: 'Prolongement', detail: 'Votre Emprunt du livre ' + emprunt.exemplaire.livre.titre.toUpperCase() + ' est prolongé de 4 semaines.'});
       } else if(res === "prolongationPasOk"){
-        this.messageService.add({severity: 'warn', summary: 'Pas de prolongement', detail: 'Votre Emprunt du livre ' + emprunt.livre.titre.toUpperCase() + ' a déjà été prolongé de 4 semaines.'});
+        this.messageService.add({severity: 'warn', summary: 'Pas de prolongement', detail: 'Votre Emprunt du livre ' + emprunt.exemplaire.livre.titre.toUpperCase() + ' a déjà été prolongé de 4 semaines.'});
       } else if(res === "rendreOk"){
         this.getEmpruntsUsagerConnecte();
-        this.messageService.add({severity: 'info', summary: 'Retour', detail: 'Le livre ' + emprunt.livre.titre + ' a été rendu.'});
+        this.messageService.add({severity: 'info', summary: 'Retour', detail: 'Le livre ' + emprunt.exemplaire.livre.titre + ' a été rendu.'});
       } else if(res === "rendrePasOk"){
-        this.messageService.add({severity: 'warn', summary: 'Problème retour', detail: 'Le livre ' + emprunt.livre.titre.toUpperCase() + ' n\'a pu être rendu.'});
+        this.messageService.add({severity: 'warn', summary: 'Problème retour', detail: 'Le livre ' + emprunt.exemplaire.livre.titre.toUpperCase() + ' n\'a pu être rendu.'});
       }
     })
   }

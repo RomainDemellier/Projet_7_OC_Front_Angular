@@ -11,7 +11,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { LoginService } from 'src/app/service/login.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EmprunterModalComponent } from '../modal/emprunter-modal/emprunter-modal.component';
 import { DialogEmpruntModalService } from 'src/app/service/dialog-emprunt-modal.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -56,7 +55,9 @@ export class ListeLivresComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.dataSource.filterPredicate = function(data, filter: string): boolean {
-        return data.titre.toLowerCase().includes(filter) || data.fullNameAuteur.toLowerCase().includes(filter) || data.genre.toLowerCase().includes(filter);
+        //return data.titre.toLowerCase().includes(filter) || data.fullNameAuteur.toLowerCase().includes(filter) || data.genre.toLowerCase().includes(filter);
+        return data.titre.toLowerCase().includes(filter) || (data.auteur.prenom + ' ' + data.auteur.nom).toLowerCase().includes(filter) || data.genre.toLowerCase().includes(filter);
+
       };
     });
   }
@@ -64,7 +65,7 @@ export class ListeLivresComponent implements OnInit {
   private getUsagerConnecte(): void {
     this.usagerService.getUsagerConnecte().subscribe((usager) => {
       this.usagerConnecte = usager;
-      this.displayedColumns = ['titre', 'fullNameAuteur', 'genre', 'nbreExemplaires', 'actions'];
+      this.displayedColumns = ['titre', 'fullNameAuteur', 'genre', 'nbreExemplaires'];
       console.log("usagerConnecte");
       console.log(this.usagerConnecte);
       const allReadyLogged: Boolean = this.loginService.isAllReadyLogged();
@@ -75,60 +76,8 @@ export class ListeLivresComponent implements OnInit {
     });
   }
 
-  public emprunter(livre: Livre): void{
-    console.log("Dans emprunter");
-    var emprunt: Emprunt = {id:null,livre:null,usager:null,dateEmprunt:null,dateRetour:null,prolonge:null,actif:null};
-    emprunt.livre = livre;
-    emprunt.usager = this.usagerConnecte;
-    this.dialogService.openDialog(this.usagerConnecte.prenom, livre.titre)
-    .afterClosed().subscribe((result) => {
-      console.log(result);
-      if(result){
-        this.empruntService.createEmprunt(emprunt).subscribe((emprunt) =>{
-          console.log("Succès");
-          console.log(emprunt);
-            this.messageService.add({severity:'success', summary:'Succès', detail:'Bravo vous avez emprunté un livre !'});
-          
-        }, (error: HttpErrorResponse) => {
-          console.log("Echec");
-          console.log(error.status);
-          this.messageService.add({severity:'warn', life:5000, summary:'Info', detail:'Désolé, vous êtes déjà en possession de ce livre ou ce livre est indisponible.'});
-        }
-        );
-      } else {
-        console.log("result : false");
-      }
-    });
-  }
-
   public applyFilter(event: Event): void{
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  public openDialog(): void{
-    this.dialogService.openDialogCreationLivre().afterClosed().subscribe((res) => {
-      if(res != "exit"){
-        if(res) {
-          this.getLivres();
-          this.messageService.add({ severity: "success", summary: "Création Ok", detail: "La création du livre a été faite avec succès" });
-        } else {
-          this.messageService.add({ severity: "error", summary: "Echec de la création du livre", detail: "Désolé, ça n'a pas fonctionné." });
-        }
-      }
-    });
-  }
-
-  public editerLivre(livre): void{
-    this.dialogService.openDialogEditLivre(livre).afterClosed().subscribe((res) => {
-      if(res != "exit"){
-        if(res) {
-          this.getLivres();
-          this.messageService.add({ severity: "success", summary: "Modification Ok", detail: "La modification du livre a été faite avec succès" });
-        } else {
-          this.messageService.add({ severity: "error", summary: "Echec de la modification du livre", detail: "Désolé, ça n'a pas fonctionné." });
-        }
-      }
-    });
   }
 }

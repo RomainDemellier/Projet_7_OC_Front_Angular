@@ -9,7 +9,7 @@
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="emprunts" matSort>
    <ng-container matColumnDef="titre">
      <mat-header-cell *matHeaderCellDef>Titre</mat-header-cell>
-     <mat-cell *matCellDef="let element">{{ element.livre.titre }}</mat-cell>
+     <mat-cell *matCellDef="let element">{{ element.exemplaire.livre.titre }}</mat-cell>
    </ng-container>
    <ng-container matColumnDef="dateEmprunt">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Date d'emprunt</mat-header-cell>
@@ -22,8 +22,8 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <a class="btn-floating btn-small action" (click)="openDialog(element)">
-        <i class="material-icons">search</i>Détails</a>
+      <button class="btn-floating btn-small action" (click)="openDialog(element)" [disabled]="element.prolonge">
+        <i class="material-icons">search</i>Détails</button>
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

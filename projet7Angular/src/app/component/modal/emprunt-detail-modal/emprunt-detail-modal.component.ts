@@ -33,12 +33,6 @@ export class EmpruntDetailModalComponent implements OnInit {
 
   }
 
-  public rendre(): void {
-    this.empruntService.rendre(this.emprunt.id).subscribe((emprunt) => 
-      this.dialogRef.close("rendreOk")
-    );
-  }
-
   public closeDialog(): void {
     this.dialogRef.close("exit");
   }

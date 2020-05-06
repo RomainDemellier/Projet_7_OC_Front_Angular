@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
   }
 
   public openDialog(): void {
-    //this.changingValue.next(true);
     this.dialogService.openDialogEditer(this.usagerConnecte)
       .afterClosed().subscribe((res) => {
         console.log(res);
@@ -61,7 +60,6 @@ export class HomeComponent implements OnInit {
           if (res) {
             console.log("Edition éffectuée");
             this.getUsagerConnecte();
-            //this.logout();
           } else {
             console.log("Edition non effectuée");
             this.messageService.add({ severity: 'error', summary: 'Echec', detail: 'Désolé la modificaiton de votre profil n a pu être effectuée' });

@@ -1,12 +1,9 @@
  <h1 class="title1">Les Livres</h1>
   <div class="row filter">
-    <mat-form-field class="searchFormField col" [class.s12]="!usagerConnecte || usagerConnecte.role=='USER'" [class.s11]="usagerConnecte && usagerConnecte.role=='ADMIN'">
+    <mat-form-field class="searchFormField col s12">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="La reine Margot">
     </mat-form-field>
-    <div class="col s1" *ngIf="usagerConnecte && usagerConnecte.role == 'ADMIN'">
-      <a class="btn-floating creer action" title="Créer un livre" (click)="openDialog()"><i class="material-icons">add</i></a>
-    </div>
   </div>
   <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">   
     <ng-container matColumnDef="titre">
@@ -15,7 +12,7 @@
     </ng-container>
     <ng-container matColumnDef="fullNameAuteur">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Auteur</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.fullNameAuteur}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.auteur.prenom + ' ' + element.auteur.nom}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="genre">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Genre</mat-header-cell>
@@ -25,17 +22,9 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre d'exemplaires</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.nbreExemplaires}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <button *ngIf="usagerConnecte && usagerConnecte.role == 'USER'" [disabled]="element.nbreExemplaires <= 0 " (click)="emprunter(element)" class="btn-floating btn-small action" title="Empunter {{element.titre}}" style="margin-right: 20px;"><i class="material-icons">book</i></button>
-        <button *ngIf="usagerConnecte && usagerConnecte.role == 'ADMIN'"  class="btn-floating btn-small action" title="Modifier {{element.titre}}" (click)="editerLivre(element)"><i class="material-icons">create</i></button>
-      </mat-cell>
-    </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="5" [length]="30"></mat-paginator>
-
+  <mat-paginator [pageSizeOptions]="[5,10,15,20]" [pageSize]="10" [length]="30"></mat-paginator>
 <p-toast></p-toast>
 

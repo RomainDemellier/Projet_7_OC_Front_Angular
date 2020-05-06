@@ -23,20 +23,9 @@ import { appRoutes } from './route';
 import { ListeLivresComponent } from './component/liste-livres/liste-livres.component';
 import { EmpruntComponent } from './component/emprunt/emprunt.component';
 import { from } from 'rxjs';
-// import { EmpruntDetailsComponent } from './component/emprunt-details/emprunt-details.component';
 import { TokenInterceptorService } from './service/token-interceptor.service';
-//import { LivreCreationComponent } from './component/livre-creation/livre-creation.component';
-import { EmprunterModalComponent } from './component/modal/emprunter-modal/emprunter-modal.component';
-import { ListeUsagersComponent } from './component/liste-usagers/liste-usagers.component';
-//import { UsagerEditerRoleComponent } from './component/usager-editer-role/usager-editer-role.component';
 import { EditerUsagerComponent } from './component/modal/editer-usager/editer-usager.component';
-//import { EmpruntDetailsComponent } from './component/emprunt-details/emprunt-details.component';
-import { EditerRoleUsagerComponent } from './component/modal/editer-role-usager/editer-role-usager.component';
 import { EmpruntDetailModalComponent } from './component/modal/emprunt-detail-modal/emprunt-detail-modal.component';
-import { LivreCreationModalComponent } from './component/modal/livre-creation-modal/livre-creation-modal.component';
-import { LivreEditerModalComponent } from './component/modal/livre-editer-modal/livre-editer-modal.component';
-import { CreateAdminModalComponent } from './component/modal/create-admin-modal/create-admin-modal.component';
-import { ListeEmpruntsComponent } from './component/liste-emprunts/liste-emprunts.component';
 
 @NgModule({
   declarations: [
@@ -47,18 +36,8 @@ import { ListeEmpruntsComponent } from './component/liste-emprunts/liste-emprunt
     SignUpComponent,
     ListeLivresComponent,
     EmpruntComponent,
-    //EmpruntDetailsComponent,
-    //LivreCreationComponent,
-    EmprunterModalComponent,
-    ListeUsagersComponent,
-    //UsagerEditerRoleComponent,
     EditerUsagerComponent,
-    EditerRoleUsagerComponent,
     EmpruntDetailModalComponent,
-    LivreCreationModalComponent,
-    LivreEditerModalComponent,
-    CreateAdminModalComponent,
-    ListeEmpruntsComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +61,6 @@ import { ListeEmpruntsComponent } from './component/liste-emprunts/liste-emprunt
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents: [EmprunterModalComponent, EditerUsagerComponent,EmpruntDetailModalComponent,EditerUsagerComponent]
+  entryComponents: [EmpruntDetailModalComponent,EditerUsagerComponent]
 })
 export class AppModule { }
